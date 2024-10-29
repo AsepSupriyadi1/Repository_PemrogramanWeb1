@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.bg-gradient-primary {
+  background: rgb(31, 70, 154);
+  background: linear-gradient(
+    360deg,
+    rgba(31, 70, 154, 1) 0%,
+    rgba(2, 106, 182, 1) 60%
+  );
+}
+
+.border-primary {
+  border-color: rgba(2, 106, 182, 1) !important;
+}
+
+body {
+  width: 100%;
+  height: min-content;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  background-image:  linear-gradient(0deg, transparent, rgba(219, 219, 219, 0.8), rgba(255, 255, 255, 0.8)), url("../images/bg_utb.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.logo {
+  height: 80px;
+  object-fit: contain;
+}
+
