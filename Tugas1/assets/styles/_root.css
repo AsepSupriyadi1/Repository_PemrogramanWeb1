@@ -1,0 +1,25 @@
+:root {
+  /* -=-=-=-=-=-=-=-=-=-=-=-= BACKGROUND -=-=-=-=-=-=-=-=-=-=-=-= */
+
+  /* GREEN */
+  --bg-green-primary: #188754;
+  --bg-green-secondary: #16623d;
+
+  /* LIGHT */
+  --bg-light-primary: #fff;
+
+  /* GRAY */
+  --bg-gray-primary: #f6f6f6;
+  --bg-secondary-primary: #e7e7e7;
+
+  /* -=-=-=-=-=-=-=-=-=-=-=-= TEXT COLOR -=-=-=-=-=-=-=-=-=-=-=-= */
+
+  /* LIGHT */
+  --text-light-primary: #fff;
+
+  /* GRAY */
+  --text-gray-primary: #f6f6f6;
+
+  /* DARK */
+  --text-dark-primary: #1d1d1d;
+}
