@@ -44,3 +44,38 @@ h6 {
   object-fit: contain;
 }
 
+/* Home */
+.content-box {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 30px;
+}
+
+.title {
+  color: #fff;
+  background-color: #188754;
+  border-radius: 10px 13px 13px 10px;
+  margin: 10px 0px 30px 0px;
+}
+
+.number-of-yntkts{
+  color: #fff;
+  background-color: #16623d;
+  border-radius: 10px;
+}
+
+.stay-text {
+  color: #000000;
+  background-color: #f6f6f6;
+  border-radius: 10px 13px 13px 10px;
+  margin: 10px 0px 30px 0px;
+}
+
+.stay-number{
+  color: #fff;
+  background-color: #16623d;
+  border-radius: 10px;
+}
+/* End Home */
