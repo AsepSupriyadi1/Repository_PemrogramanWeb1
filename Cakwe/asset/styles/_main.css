@@ -91,6 +91,12 @@
   object-fit: cover;
 }
 
+.l-search-post-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
 .l-w-full {
   width: 100%;
 }

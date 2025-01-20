@@ -22,8 +22,15 @@ if (isset($_GET['url'])) {
         case 'content-policy':
             require 'views/content-policy.php';
             break;
+        case 'edit-profile':
+            require 'views/edit-profile.php';
+            break;
+        case 'search-result':
+            require 'views/search-result.php';
+            break;
         default:
             http_response_code(404);
+            require 'views/404.php';
             echo print_r($urlParts[0]);
             echo "404 - Halaman tidak ditemukan";
             break;
