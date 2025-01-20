@@ -28,6 +28,9 @@ if (isset($_GET['url'])) {
         case 'search-result':
             require 'views/search-result.php';
             break;
+        case 'friends-error':
+            require 'views/friends-error.php';
+            break;
         default:
             http_response_code(404);
             require 'views/404.php';

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cakwe | 404 Not Found</title>
+    <title>Cakwe | Friends Not Found</title>
 
     <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -24,9 +24,8 @@
 
     <style>
         img {
-            max-width: 200px;
-            max-height: 300px;
-            margin-bottom: 20px;
+            max-width: 100px;
+            max-height: 150px;
         }
     </style>
 </head>
@@ -35,15 +34,28 @@
     <?php require("c:/xampp/htdocs/Cakwe/views/components/navbar_component.php") ?>
 
     <!-- Main Content -->
-    <div class="l-main d-flex flex-column align-items-center justify-content-center text-center">
-        <!-- Container Content Tengah (Scroll) -->
-        <div class="l-content mt-5 p-5">
-            <div class="404-not-found mt-5 p-5">
-                <img src="./asset/images/404.jpg" class="img-fluid" alt="page_not_found"></img>
-                <h1 class="l-semibold-xl">Oops!</h1>
-                <p class="l-uppercase-light-text-md">404 - PAGE NOT FOUND</p>
-                <p class="l-medium-sm">The page you are looking for might have been removed had its name changed, or temporarily unavailable</p>
+    <div class="l-main">
+        <!-- Sidebar Kiri -->
+        <?php require("c:/xampp/htdocs/Cakwe/views/components/sidebar_component.php") ?>
+
+        <div class="l-content">
+            <div class="row bg-light mt-5 mx-5 border border-1 rounded l-post-item p-4 align-items-center">
+
+                <div class="col-3 d-flex align-items-center justify-content-center">
+                    <img src="./asset/images/robot.png" class="img-fluid" alt="friends_not_found"></img>
+                </div>
+
+                <div class="col-9 align-items-center justify-content-center">
+                    <p class="l-medium-xl">You are not following anyone yet!</p>
+                    <p class="l-paragraph">Go start following your friends</p>
+                </div>
+
             </div>
+        </div>
+
+        <!-- Sidebar Kanan -->
+        <div class="l-sidebar-right py-2 px-3">
+            <?php require("c:/xampp/htdocs/Cakwe/views/components/recent-post_component.php") ?>
         </div>
     </div>
 

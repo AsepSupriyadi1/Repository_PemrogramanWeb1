@@ -290,6 +290,11 @@ textarea {
   font-weight: var(--font-semibold);
 }
 
+.l-medium-xl {
+  font-size: var(--font-xl);
+  font-weight: var(--font-bold);
+}
+
 .l-medium-lg {
   font-size: var(--font-lg);
   font-weight: var(--font-medium);
