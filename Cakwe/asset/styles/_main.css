@@ -1,0 +1,150 @@
+@import url(./_global.css);
+
+* {
+  box-sizing: border-box;
+}
+
+/*  =============================== NAVBAR & SIDEBAR MAIN CONFIG  ===============================  */
+
+.l-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 10px;
+}
+
+.l-main {
+  height: calc(100vh - 65px);
+  margin-top: 65px !important;
+  display: flex;
+  overflow-y: scroll;
+  position: relative;
+}
+
+.l-sidebar-left {
+  position: sticky;
+  top: 0;
+  left: 0;
+  /* flex: 0 0 280px; */
+  width: 280px !important;
+  height: 100% !important;
+}
+
+.l-sidebar-right {
+  position: sticky;
+  top: 0;
+  left: 0;
+  /* flex: 0 0 350px; */
+  width: 350px;
+  /* background-color: #f0f0f0;  */
+  height: 100%;
+}
+
+.l-content {
+  flex-grow: 1;
+  background-color: #ffffff;
+  padding: 20px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.l-detail-content {
+  width: 60%;
+  padding: 20px;
+  height: min-content;
+}
+
+.sidebar__menu-items {
+  display: flex;
+  align-items: center;
+  border: none;
+  background: none;
+  border-radius: 5px;
+}
+
+.sidebar__menu-items:hover {
+  background-color: var(--bg-secondary);
+}
+
+.sidebar__menu-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+/*  =============================== END OF NAVBAR & SIDEBAR MAIN CONFIG  ===============================  */
+
+/*  =============================== IMAGES  ===============================  */
+
+.l-post-image {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.l-recent-post-image {
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+}
+
+.l-w-full {
+  width: 100%;
+}
+/*  =============================== END OF IMAGES  ===============================  */
+
+/*  =============================== TABS  ===============================  */
+
+/* TABBB */
+#tab nav {
+  display: flex;
+}
+
+/* #tab nav a {
+
+} */
+
+#tab nav .active {
+  color: var(--warning);
+  text-decoration: underline !important;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/*  =============================== END OF TABS  ===============================  */
+
+/*  =============================== SCROLLBAR  ===============================  */
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #c5c5c5;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/*  =============================== END OF SCROLLBAR  ===============================  */
+
+
+

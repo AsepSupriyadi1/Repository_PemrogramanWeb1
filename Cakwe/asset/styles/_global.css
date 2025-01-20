@@ -1,0 +1,394 @@
+:root {
+  /* FONT SIZE  */
+  --font-xl: 1.5em;
+  --font-lg: 1.125em;
+  --font-md: 0.875em;
+  --font-sm: 0.75em;
+  --font-xs: 0.625em;
+  --font-xxs: 0.5em;
+
+  /* FONT WEIGHT */
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* Font Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f6f8f9;
+  --bg-tertiary: #e5ebee;
+  --bg-quaternary: #e2e7e9;
+  --light-grey: #5c6c74;
+  --medium-grey: #576f76;
+  --slate-grey: #434343;
+  --cool-grey: #333d42;
+  --deep-blue: #2a3c42;
+  --dark-grey-blue: #21272a;
+  --midnight-grey: #181c1f;
+  --charcoal: #0f1a1c;
+  --jet-black: #131313;
+  --pure-black: #000000;
+  --text-primary: #333d42;
+  --warning: #ff4500;
+  --warning-darker: #e94002;
+  --input: #f3f3f3;
+  --icon-color: #181c1f;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+span,
+p,
+div,
+input,
+textarea {
+  color: var(--pure-black);
+  line-height: normal !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: "Inter", serif;
+  font-optical-sizing: auto;
+  font-weight: var(--font-regular);
+  text-decoration: none !important;
+}
+
+/* =============================== COLOR VARIABLES  =============================== */
+
+/* Font Color Classes */
+.l-text-bg-primary {
+  color: #ffffff;
+}
+.l-text-bg-secondary {
+  color: #f6f8f9;
+}
+.l-text-bg-tertiary {
+  color: #e5ebee;
+}
+.l-text-bg-quaternary {
+  color: #e2e7e9;
+}
+.l-text-light-grey {
+  color: #5c6c74;
+}
+.l-text-medium-grey {
+  color: #576f76;
+}
+.l-text-slate-grey {
+  color: #434343;
+}
+.l-text-cool-grey {
+  color: #333d42;
+}
+.l-text-deep-blue {
+  color: #2a3c42;
+}
+.l-text-dark-grey-blue {
+  color: #21272a;
+}
+.l-text-midnight-grey {
+  color: #181c1f;
+}
+.l-text-charcoal {
+  color: #0f1a1c;
+}
+.l-text-jet-black {
+  color: #131313;
+}
+.l-text-pure-black {
+  color: #000000;
+}
+.l-text-primary {
+  color: #115bca;
+}
+
+/* Background Color Classes */
+.l-bg-primary {
+  background-color: #ffffff;
+}
+.l-bg-warning {
+  background-color: #ff4500;
+}
+.l-bg-secondary {
+  background-color: #f6f8f9;
+}
+.l-bg-tertiary {
+  background-color: #e5ebee;
+}
+.l-bg-quaternary {
+  background-color: #e2e7e9;
+}
+.l-light-grey {
+  background-color: #5c6c74;
+}
+.l-medium-grey {
+  background-color: #576f76;
+}
+.l-slate-grey {
+  background-color: #434343;
+}
+.l-cool-grey {
+  background-color: #333d42;
+}
+.l-deep-blue {
+  background-color: #2a3c42;
+}
+.l-dark-grey-blue {
+  background-color: #21272a;
+}
+.l-midnight-grey {
+  background-color: #181c1f;
+}
+.l-charcoal {
+  background-color: #0f1a1c;
+}
+.l-jet-black {
+  background-color: #131313;
+}
+.l-pure-black {
+  background-color: #000000;
+}
+.l-text-primary {
+  background-color: #333d42;
+}
+
+.l-bg-input {
+  background-color: #f3f3f3;
+}
+.l-color-icon {
+  background-color: #181c1f;
+}
+/*  =============================== END OF COLOR VARIABLES  =============================== */
+
+/*  =============================== BUTTON  =============================== */
+.l-btn-primary {
+  font-size: var(--font-md);
+  font-weight: var(--font-medium);
+  color: white !important;
+  background-color: var(--warning) !important;
+  border-radius: 50px;
+  padding: 10px 30px !important;
+}
+
+.l-btn-secondary {
+  font-size: var(--font-md);
+  font-weight: var(--font-medium);
+  color: var(--charcoal) !important;
+  background-color: #EAEDEF !important;
+  border-radius: 50px;
+  padding: 10px 15px !important;
+}
+
+/*  ===============================  END OF BUTTON  =============================== */
+
+/*  =============================== PADDING  =============================== */
+.l-p-input-sm {
+  display: block;
+  padding: 10px 20px !important;
+}
+
+.l-p-input-md {
+  display: block;
+  padding: 15px 20px !important;
+}
+/*  ===============================  END OF PADDING  ===============================  */
+
+/*  =============================== TYPOGRAPHY CLASSES  ===============================  */
+.l-medium-input-text {
+  font-size: var(--font-md);
+  font-weight: var(--font-regular);
+}
+
+.l-regular-md-input-text {
+  font-size: var(--font-md);
+  font-weight: var(--font-regular);
+}
+
+.l-regular-sm-input-text {
+  font-size: var(--font-md);
+  font-weight: var(--font-regular);
+}
+
+.l-light-input-text {
+  font-size: var(--font-md);
+  font-weight: var(--font-light);
+}
+
+.l-paragraph {
+  font-size: var(--font-md);
+  font-weight: var(--font-light);
+}
+
+.l-icon {
+  font-size: var(--font-sm);
+  font-weight: var(--font-regular);
+}
+
+.l-uppercase-light-text-lg {
+  text-transform: uppercase;
+  font-size: var(--font-lg);
+  font-weight: var(--font-light);
+}
+
+.l-uppercase-light-text-md {
+  text-transform: uppercase;
+  font-size: var(--font-md);
+  font-weight: var(--font-light);
+}
+
+.l-uppercase-light-text-sm {
+  text-transform: uppercase;
+  font-size: var(--font-sm);
+  font-weight: var(--font-light);
+}
+
+.l-uppercase-light-text-sm {
+  text-transform: uppercase;
+  font-size: var(--font-sm);
+  font-weight: var(--font-light);
+}
+
+.l-uppercase-light-text-xs {
+  text-transform: uppercase;
+  font-size: var(--font-xs);
+  font-weight: var(--font-light);
+}
+
+.l-uppercase-light-text-xxs {
+  text-transform: uppercase;
+  font-size: var(--font-xxs);
+  font-weight: var(--font-light);
+}
+
+.l-semibold-xl {
+  font-size: var(--font-xl);
+  font-weight: var(--font-semibold);
+}
+
+.l-semibold-lg {
+  font-size: var(--font-lg);
+  font-weight: var(--font-semibold);
+}
+
+.l-semibold-md {
+  font-size: var(--font-md);
+  font-weight: var(--font-semibold);
+}
+
+.l-semibold-sm {
+  font-size: var(--font-sm);
+  font-weight: var(--font-semibold);
+}
+
+.l-semibold-xs {
+  font-size: var(--font-xs);
+  font-weight: var(--font-semibold);
+}
+
+.l-medium-lg {
+  font-size: var(--font-lg);
+  font-weight: var(--font-medium);
+}
+
+.l-medium-md {
+  font-size: var(--font-md);
+  font-weight: var(--font-medium);
+}
+
+.l-medium-sm {
+  font-size: var(--font-sm);
+  font-weight: var(--font-medium);
+}
+
+.l-medium-xs {
+  font-size: var(--font-xs);
+  font-weight: var(--font-medium);
+}
+
+.l-regular-lg {
+  font-size: var(--font-lg);
+  font-weight: var(--font-regular);
+}
+
+.l-regular-md {
+  font-size: var(--font-md);
+  font-weight: var(--font-regular);
+}
+
+.l-regular-sm {
+  font-size: var(--font-sm);
+  font-weight: var(--font-regular);
+}
+
+.l-regular-xs {
+  font-size: var(--font-xs);
+  font-weight: var(--font-regular);
+}
+
+.l-light-lg {
+  font-size: var(--font-lg);
+  font-weight: var(--font-light);
+}
+
+.l-light-md {
+  font-size: var(--font-md);
+  font-weight: var(--font-light);
+}
+
+.l-light-sm {
+  font-size: var(--font-sm);
+  font-weight: var(--font-light);
+}
+
+.l-light-xs {
+  font-size: var(--font-xs);
+  font-weight: var(--font-light);
+}
+
+/*  =============================== END OF TYPOGRAPHY CLASSES  ===============================  */
+
+/*  =============================== CURSOR  ===============================  */
+
+.l-cursor-pointer {
+  cursor: pointer;
+}
+
+/*  =============================== END OF CURSOR  ===============================  */
+
+/*  =============================== POST ITEM  ===============================  */
+.l-post-image-container {
+  position: relative;
+  width: 100%;
+  height: 600px;  
+}
+
+.l-post-item:hover {
+  background-color: var(--bg-secondary) !important;
+}
+
+.l-post-item:hover .overlay {
+  position: absolute;
+  z-index: 1000;
+  width: 100%;
+  height: 600px;
+  background-color: rgba(0, 0, 0, 0.252);
+}
+
+/*  =============================== END OF POST ITEM  ===============================  */
+
+
+/*  =============================== PROFILE  ===============================  */
+
+.l-profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+/*  =============================== END OF PROFILE  ===============================  */
