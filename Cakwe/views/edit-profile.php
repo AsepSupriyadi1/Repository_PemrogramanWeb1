@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cakwe | Home</title>
+    <title>Cakwe | Edit Profile</title>
 
     <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -21,6 +21,14 @@
     <link rel="stylesheet" href="./asset/styles/_global.css">
     <link rel="stylesheet" href="./asset/styles/_main.css">
     <link rel="stylesheet" href="./asset/styles/_bootstrap.css">
+
+    <!-- Include SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -29,7 +37,7 @@
     <!-- Main Content -->
     <div class="l-main">
         <!-- Sidebar Kiri -->
-        <?php include 'views/components/sidebar_component.php' ?>        
+        <?php include 'views/components/sidebar_component.php' ?>
 
         <div class="l-content">
             <div class="p-4">
@@ -39,32 +47,34 @@
                 <div>
                     <h2 class="l-medium-lg my-4">Avatar</h2>
 
-                    <div class="d-flex align-items-center column-gap-2 my-4">
-                        <img class="l-profile-picture" src="./asset/images/image.png" alt="photo_profile">
-                        <div>
-                            <button href="" class="btn l-btn-secondary ms-auto align-self-end">Change Avatar</button>
+                    <form method="POST" action="/Cakwe/process/profile-edit.php" enctype="multipart/form-data">
+                        <div class="d-flex align-items-center column-gap-2 my-4">
+                            <img class="l-profile-picture" src="data:image/jpeg;base64,<?= base64_encode($profile_picture) ?>" alt="photo_profile">
+                            <div>
+                                <input type="file" name="profile_picture" accept="image/*" class="form-control l-p-input-md rounded-2">
+                                <button type="submit" class="btn l-btn-primary ms-auto align-self-end mt-2">Change Avatar</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
 
                     <h2 class="l-medium-lg my-4">General</h2>
 
-                    <div class="tab-content active" data-content='1'>
-                            <div class="d-flex flex-column row-gap-3">
-                                <div>
-                                    <input class="form-control l-p-input-md l-regular-md-input-text  rounded-2"
-                                        type="text" name="title" id="title" placeholder="Enter name.." value="Shinmarin" 
-                                        required>
-                                </div>
-
-                                <div>
-                                    <textarea class="form-control l-regular-md-input-text l-p-input-md  rounded-2"
-                                        name="desc" id="desc" placeholder="Enter description..." rows="10"
-                                        required>Seggs</textarea>
-
-                                </div>
-                                <button type="button" class="btn l-btn-primary ms-auto align-self-end">Submit</button>
+                    <form method="POST" action="/Cakwe/process/profile-edit.php">
+                        <div class=" d-flex flex-column row-gap-3">
+                            <div>
+                                <input class="form-control l-p-input-md l-regular-md-input-text rounded-2"
+                                    type="text" name="full_name" id="full_name" placeholder="Enter name.." value="<?= $full_name ?>"
+                                    required>
                             </div>
+
+                            <div>
+                                <textarea class="form-control l-regular-md-input-text l-p-input-md rounded-2"
+                                    name="bio" id="bio" placeholder="Enter description..." rows="10"
+                                    required><?= $bio ?></textarea>
+                            </div>
+                            <button type="submit" class="btn l-btn-primary ms-auto align-self-end">Submit</button>
                         </div>
+                    </form>
                 </div>
 
             </div>
@@ -74,9 +84,17 @@
     </div>
 
 
+    <!-- BOOTSTRAP -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+
+    <!-- Include SweetAlert CSS and JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+    <!-- ALERT HELPER -->
+    <?php include './helper/alert-helper.php' ?>
+
 </body>
 
 </html>

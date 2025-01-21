@@ -1,6 +1,10 @@
 <?php
 session_start();
 $isLoggedIn = isset($_SESSION['user_id']);
+
+if ($isLoggedIn) {
+    include 'process/get-detail-user.php';
+}
 ?>
 
 <nav class="navbar navbar-expand-lg l-bg-primary border l-navbar">

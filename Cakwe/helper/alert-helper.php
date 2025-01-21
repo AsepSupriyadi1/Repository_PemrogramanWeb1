@@ -36,8 +36,30 @@ $modal_metadata = [
         'message' => 'User with the entered email is not found.',
         'icon' => 'error'
     ],
+    'user_not_login' => [
+        'title' => 'Failed',
+        'message' => 'Please Login First!',
+        'icon' => 'error'
+    ],
 
-    // ============ LOGIN MESSAGE HANDLER ============
+    // ============ PROFILE UPDATE MESSAGE HANDLER ============
+    'update_profile_success' => [
+        'title' => 'Success',
+        'message' => 'Profile updated successfully.',
+        'icon' => 'success'
+    ],
+    'update_profile_error' => [
+        'title' => 'Failed',
+        'message' => 'Update Profile Failed. Please try again.',
+        'icon' => 'error'
+    ],
+    'image_size_error' => [
+        'title' => 'Failed',
+        'message' => 'Please Select an Image with a Maximum Size of 2MB.',
+        'icon' => 'error'
+    ],
+
+    // ============ LOGOUT MESSAGE HANDLER ============
 
     'logout_success' => [
         'title' => 'Success',
@@ -72,8 +94,7 @@ function showAlert($message, $errors)
             }
         });
     </script>";
-}
-;
+};
 
 
 
@@ -81,4 +102,3 @@ if (isset($_GET['message'])) {
     $message = $_GET['message'];
     echo showAlert($message, $modal_metadata);
 }
-
