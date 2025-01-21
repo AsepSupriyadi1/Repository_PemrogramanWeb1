@@ -48,10 +48,10 @@
                         <span href="#" class="l-regular-lg l-cursor-pointer" data-id='3'>Link</span>
                     </nav>
 
-                    <form action="">
-
-                        <!-- TEXT INPUT -->
-                        <div class="tab-content active" data-content='1'>
+                    
+                    <!-- TEXT INPUT -->
+                    <div class="tab-content active" data-content='1'>
+                        <form id="" method="POST" action="/Cakwe/process/add-post.php" enctype="multipart/form-data">
                             <div class="d-flex flex-column row-gap-3">
                                 <div>
                                     <label class="l-regular-md-input-text mb-2" for="title">Title<span
@@ -61,19 +61,22 @@
                                 </div>
 
                                 <div>
-                                    <label class="l-regular-md-input-text mb-2" for="desc">Description <span
+                                    <label class="l-regular-md-input-text mb-2" for="description">Description <span
                                             class="text-secondary" class="text-danger">(optional)</span></label>
                                     <textarea class="form-control l-regular-md-input-text l-p-input-md  rounded-2"
-                                        name="desc" id="desc" placeholder="Enter description..." rows="10"
-                                        required></textarea>
+                                        name="description" id="description" placeholder="Enter description..." rows="10"
+                                        ></textarea>
 
                                 </div>
-                                <button type="button" class="btn l-btn-primary ms-auto align-self-end">Submit</button>
+                                <button type="submit" class="btn l-btn-primary ms-auto align-self-end">Submit</button>
                             </div>
-                        </div>
+                        </form>
+                    </div>
 
-                        <!-- IMAGES INPUT -->
-                        <div class="tab-content" data-content='2'>
+                    
+                    <!-- IMAGES INPUT -->
+                    <div class="tab-content" data-content='2'>
+                        <form id="" method="POST" action="/Cakwe/process/add-post.php" enctype="multipart/form-data">
                             <div class="d-flex flex-column row-gap-3">
                                 <div>
                                     <label class="l-regular-md-input-text mb-2" for="title">Title<span
@@ -86,14 +89,16 @@
                                     <label class="l-regular-md-input-text mb-2" for="desc">Image <span
                                             class="text-danger">*</span></label>
                                     <input class="form-control l-regular-md-input-text l-p-input-md rounded-2"
-                                        type="file">
+                                        type="file" name="image" required>
                                 </div>
-                                <button type="button" class="btn l-btn-primary ms-auto align-self-end">Submit</button>
+                                <button type="submit" class="btn l-btn-primary ms-auto align-self-end">Submit</button>
                             </div>
-                        </div>
+                        </form>
+                    </div>
 
-                        <!-- URL INPUT -->
-                        <div class="tab-content" data-content='3'>
+                    <!-- URL INPUT -->
+                    <div class="tab-content" data-content='3'>
+                        <form id="" method="POST" action="/Cakwe/process/add-post.php" enctype="multipart/form-data">
                             <div class="d-flex flex-column row-gap-3">
                                 <div>
                                     <label class="l-regular-md-input-text mb-2" for="title">Title<span
@@ -105,13 +110,13 @@
                                     <label class="l-regular-md-input-text mb-2" for="url">Link / URL<span
                                             class="text-danger">*</span></label>
                                     <input class="form-control l-p-input-md l-regular-md-input-text  rounded-2"
-                                        type="text" name="url" id="url" placeholder="Enter URL..." required>
+                                        type="text" name="link" id="url" placeholder="Enter URL..." required>
                                 </div>
 
-                                <button type="button" class="btn l-btn-primary ms-auto align-self-end">Submit</button>
+                                <button type="submit" class="btn l-btn-primary ms-auto align-self-end">Submit</button>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
 
                 </div>
 
@@ -129,7 +134,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-    <script src="./jqueries/tabs.js"></script>
+    <script src="./asset/jqueries/tabs.js"></script>
 </body>
 
 </html>

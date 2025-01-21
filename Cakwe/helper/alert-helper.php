@@ -37,7 +37,7 @@ $modal_metadata = [
         'icon' => 'error'
     ],
 
-    // ============ LOGIN MESSAGE HANDLER ============
+    // ============ LOGOUT MESSAGE HANDLER ============
 
     'logout_success' => [
         'title' => 'Success',
@@ -45,6 +45,24 @@ $modal_metadata = [
         'icon' => 'success'
     ],
 
+    // ============ POST MESSAGE HANDLER ============
+    'post_success' => [
+        'title' => 'Success',
+        'message' => 'Post successfully uploaded',
+        'icon' => 'success'
+    ],
+
+    'post_failed' => [
+        'title' => 'Failed',
+        'message' => 'Post failed to upload',
+        'icon' => 'error'
+    ],
+
+    'post_not_login' => [
+        'title' => 'Failed',
+        'message' => 'User not logged in',
+        'icon' => 'error'
+    ],
 
     // ============ ERROR MESSAGE HANDLER ============
     'error' => [
