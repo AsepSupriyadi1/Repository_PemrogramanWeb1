@@ -7,6 +7,9 @@ if (isset($_GET['url'])) {
 
     // Routing berdasarkan URL
     switch ($urlParts[0]) {
+        case 'home':
+            require 'index.php';
+            break;
         case 'add-post':
             require 'views/add-post.php';
             break;
@@ -21,6 +24,9 @@ if (isset($_GET['url'])) {
             break;
         case 'content-policy':
             require 'views/content-policy.php';
+            break;
+        case 'error':
+            require 'views/error.php';
             break;
         case 'edit-profile':
             require 'views/edit-profile.php';
