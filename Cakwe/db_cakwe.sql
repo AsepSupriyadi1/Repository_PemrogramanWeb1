@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 21 Jan 2025 pada 05.55
+-- Waktu pembuatan: 21 Jan 2025 pada 06.35
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -39,7 +39,7 @@ CREATE TABLE `tb_users` (
 --
 
 INSERT INTO `tb_users` (`user_id`, `email`, `password`, `created_at`) VALUES
-(1, 'admin@gmail.com', '$2y$10$6qU1DvbcP9Am3fpQj1VwU.k/tPK6SgSgPkYbm6AzFwxphidx42LMi', '2025-01-20 17:04:01');
+(1, 'admin@gmail.com', '$2y$10$zY5wVLRt339BJEo7KEKpRuY6gK8VqA/yS2E61ZQ/19qF2S9o3NntO', '2025-01-21 05:31:47');
 
 -- --------------------------------------------------------
 
@@ -60,7 +60,7 @@ CREATE TABLE `tb_user_detail` (
 --
 
 INSERT INTO `tb_user_detail` (`user_detail_id`, `full_name`, `bio`, `profile_picture`, `user_id`) VALUES
-(1, 'admin_Oymn', NULL, NULL, 1);
+(1, 'admin_By59', NULL, NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -71,7 +71,8 @@ INSERT INTO `tb_user_detail` (`user_detail_id`, `full_name`, `bio`, `profile_pic
 --
 ALTER TABLE `tb_users`
   ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `email_unique` (`password`);
+  ADD UNIQUE KEY `email_unique` (`password`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indeks untuk tabel `tb_user_detail`
@@ -88,7 +89,7 @@ ALTER TABLE `tb_user_detail`
 -- AUTO_INCREMENT untuk tabel `tb_users`
 --
 ALTER TABLE `tb_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_user_detail`

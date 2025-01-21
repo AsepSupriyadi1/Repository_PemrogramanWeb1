@@ -51,7 +51,7 @@ try {
 } catch (mysqli_sql_exception $e) {
     if ($e->getCode() == 1062) {
         // Duplicate entry error
-        header("Location: /Cakwe/home?message=duplicate_entry");
+        header("Location: /Cakwe/home?message=registration_duplicate_entry");
     } else {
         // Other MySQL errors
         header("Location: /Cakwe/home?message=registration_failed");
