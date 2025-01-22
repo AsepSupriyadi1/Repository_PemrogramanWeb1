@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cakwe | Home</title>
+    <title>Cakwe | My Profile</title>
 
     <!-- BASE URL -->
     <base href="http://localhost/Cakwe/">
@@ -24,6 +24,13 @@
     <link rel="stylesheet" href="asset/styles/_main.css">
     <link rel="stylesheet" href="asset/styles/_global.css">
     <link rel="stylesheet" href="asset/styles/_bootstrap.css">
+
+    <!-- Include SweetAlert CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -41,12 +48,12 @@
             <div class="p-4">
 
                 <div class="d-flex align-items-center column-gap-2">
-                    <img class="l-profile-picture" src="./asset/images/image.png" alt="photo_profile">
+                    <img class="l-profile-picture" src="data:image/jpeg;base64,<?= base64_encode($profile_picture) ?>" alt="photo_profile">
                     <div>
-                        <h4 class="l-medium-xl">Shimarin</h4>
+                        <h4 class="l-medium-xl"><?= $full_name ?></h4>
                         <div class="mt-2">
                             <h5 class="l-medium-md">Bio:</h5>
-                            <p class="l-regular-md">Lonely 💦</p>
+                            <p class="l-regular-md"><?= $bio ?></p>
                         </div>
                     </div>
                 </div>
@@ -177,6 +184,12 @@
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
     <script src="./jqueries/tabs.js"></script>
+
+    <!-- Include SweetAlert CSS and JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+    <!-- ALERT HELPER -->
+    <?php include './helper/alert-helper.php' ?>
 </body>
 
 </html>
