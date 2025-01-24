@@ -23,8 +23,26 @@ if ($isLoggedIn) {
             <button type="button" class="btn l-btn-primary ms-auto" data-bs-toggle="modal"
                 data-bs-target="#loginModal">Login</button>
         <?php elseif ($isLoggedIn): ?>
-            <a href="/Cakwe/process/account/controllers/logout.php" class="btn l-btn-primary ms-auto">Logout</a>
+            <div class="d-flex align-items-center column-gap-3">
+                <div>
+                    <a href="/Cakwe/add-post" class="d-flex align-items-center column-gap-2"> <img src="./asset/icons/add.svg" alt=""> Create</a>
+                </div>
+
+                <div class="btn-group dropstart px-3">
+                    <img class="l-profile-picture-md dropdown-toggle" 
+                    src="data:image/jpeg;base64,<?= base64_encode($user_detail['profile_picture']) ?>" 
+                    alt="photo_profile" data-bs-toggle="dropdown" aria-expanded="false">
+                    <ul class="dropdown-menu p-2">
+                        <li><a class="dropdown-item p-2" href="/Cakwe/profile">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a href="/Cakwe/process/account/controllers/logout.php" class="dropdown-item p-2">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+            
         <?php endif; ?>
+
+       
 
     </div>
 </nav>

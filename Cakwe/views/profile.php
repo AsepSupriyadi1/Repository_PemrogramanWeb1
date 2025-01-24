@@ -59,11 +59,50 @@ if (isset($_SESSION['user_id'])) {
                     <img class="l-profile-picture"
                         src="data:image/jpeg;base64,<?= base64_encode($user_detail['profile_picture']) ?>"
                         alt="photo_profile">
-                    <div>
-                        <h4 class="l-medium-xl"><?= $user_detail['full_name'] ?></h4>
-                        <div class="mt-2">
-                            <h5 class="l-medium-md">Bio:</h5>
-                            <p class="l-regular-md"><?= $user_detail['bio'] ?></p>
+                            <div class="ps-2">
+
+                                <h4 class="l-medium-xl"><?= $user_detail['full_name'] ?>  
+                                    <a class="btn l-btn-secondary ms-auto align-self-end d-lg-none" href="/Cakwe/edit-profile">Edit</a> 
+                                </h4>                       
+                               
+                                <div class="mt-2">
+                                    <h5 class="l-medium-md">Bio:</h5>
+                                    <p class="l-regular-md"><?= $user_detail['bio'] ?></p>
+                                <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row gap-2 my-3 d-lg-none">
+                    <div class="col-3">
+                        <div>
+                            <h5 class="l-semibold-md">200</h5>
+                            <p class="l-regular-sm">Followers</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div>
+                            <h5 class="l-semibold-md">200</h5>
+                            <p class="l-regular-sm">Following</p>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div>
+                            <h5 class="l-semibold-md">03 Jul, 2004</h5>
+                            <p class="l-regular-sm">Date birth</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div>
+                            <h5 class="l-semibold-md">200</h5>
+                            <p class="l-regular-sm">Total funs</p>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div>
+                            <h5 class="l-semibold-md">200</h5>
+                            <p class="l-regular-sm">Comments</p>
                         </div>
                     </div>
                 </div>
@@ -113,7 +152,7 @@ if (isset($_SESSION['user_id'])) {
 
 
         <!-- Sidebar Kanan -->
-        <div class="l-sidebar-right">
+        <div class="l-sidebar-right d-none d-lg-block">
 
             <div class="py-4 pe-3">
                 <!-- CONTAINER -->
@@ -172,7 +211,7 @@ if (isset($_SESSION['user_id'])) {
                                         <h4 class="l-regular-md">Profile</h4>
                                         <p class="l-light-md">Customize your profile</p>
                                     </div>
-                                    <a class="btn l-btn-secondary ms-auto align-self-end">Edit</a>
+                                    <a class="btn l-btn-secondary ms-auto align-self-end" href="/Cakwe/edit-profile">Edit</a>
                                 </div>
 
                             </div>
