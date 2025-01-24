@@ -1,5 +1,5 @@
 <?php
-include 'process/account/functions/get-detail-user.php';
+include 'process/account/functions.php';
 $isLoggedIn = isset($_SESSION['user_id']);
 $user_detail = null;
 

@@ -1,5 +1,6 @@
 <?php
 session_start();
+$user_id = null;
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 }
@@ -73,23 +74,22 @@ if (isset($_SESSION['user_id'])) {
                             <div class="py-3">
                                 <div class="px-3">
                                     <div class="d-flex align-items-center column-gap-1">
-                                        <?php if($user_detail['profile_picture'] == null): ?>
-                                            <img class="l-profile-picture-sm"
-                                            src="./asset/images/avatar_default.png"
-                                            alt="profile_picture">
+                                        <?php if ($user_detail['profile_picture'] == null): ?>
+                                            <img class="l-profile-picture-sm" src="./asset/images/avatar_default.png"
+                                                alt="profile_picture">
                                         <?php else: ?>
                                             <img class="l-profile-picture-sm"
-                                            src="data:image/jpeg;base64,<?= base64_encode($user_detail['profile_picture']) ?>"
-                                            alt="profile_picture">
+                                                src="data:image/jpeg;base64,<?= base64_encode($user_detail['profile_picture']) ?>"
+                                                alt="profile_picture">
                                         <?php endif; ?>
-                                      
+
                                         <span class="l-regular-md"><?= $user_detail['full_name'] ?></span>
                                         <img src="./asset/icons/dot.png" alt="dot">
                                         <span class="l-light-sm"><?= timeAgo($post['created_at']) ?></span>
                                     </div>
                                     <div class="my-3">
                                         <?php $encryptedId = encryptId($post['post_id']); ?>
-                                        <a href="/Cakwe/detail-post?id=<?= urlencode( $encryptedId) ?>">
+                                        <a href="/Cakwe/detail-post?id=<?= urlencode($encryptedId) ?>">
                                             <h1 class="l-medium-lg"><?= $post['title'] ?></h1>
                                         </a>
                                         <p class="l-paragraph"><?= $post['description'] ?></p>
@@ -108,8 +108,7 @@ if (isset($_SESSION['user_id'])) {
                                 <?php if ($post['link'] != null): ?>
                                     <?php $embedUrl = getYouTubeEmbedUrl($post['link']); ?>
                                     <div class="l-post-image-container">
-                                        <iframe class="l-post-url"
-                                            src="<?= $embedUrl ?>" frameborder="0" allowfullscreen></iframe>
+                                        <iframe class="l-post-url" src=<?= $embedUrl ?> frameborder="0" allowfullscreen></iframe>
                                     </div>
                                 <?php endif; ?>
 
@@ -124,9 +123,30 @@ if (isset($_SESSION['user_id'])) {
                                             <img src="./asset/icons/share.svg" alt="share">
                                             <span class="l-regular-sm">Share</span>
                                         </div>
-                                        <div class="d-flex column-gap-1 align-items-center">
-                                            <img src="./asset/icons/more.svg" alt="more">
-                                        </div>
+
+                                        <?php if ($user_id != null): ?>
+                                            <div class="dropdown">
+                                                <img src="./asset/icons/more.svg" alt="more" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                <ul class="dropdown-menu p-2">
+                                                    <li>
+                                                        <a
+                                                            href="/Cakwe/process/post/controllers/bookmark-post.php?post_id=<?= $post['post_id'] ?>">
+                                                            <div
+                                                                class="d-flex align-items-center dropdown-item p-2 column-gap-2">
+                                                                <?php if (isBookmarked($post['post_id'], $user_id)): ?>
+                                                                    <img src="./asset/icons/bookmark-filled.svg" alt="bookmark">
+                                                                    <p class="l-regular-md">Unbookmark post</p>
+                                                                <?php else: ?>
+                                                                    <img src="./asset/icons/bookmark.svg" alt="bookmark">
+                                                                    <p class="l-regular-md">Bookmark post</p>
+                                                                <?php endif; ?>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        <?php endif; ?> 
                                     </div>
                                 </div>
                             </div>
@@ -144,13 +164,6 @@ if (isset($_SESSION['user_id'])) {
             <?php include 'views/components/recent-post_component.php' ?>
         </div>
     </div>
-
-    <!-- Modal HTML embedded directly into document -->
-    <div id="ex1" class="modal">
-        <p>Thanks for clicking. That felt good.</p>
-        <a href="#" rel="modal:close">Close</a>
-    </div>
-
 
     <!-- BOOTSTRAP -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
