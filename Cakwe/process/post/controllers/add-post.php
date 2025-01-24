@@ -1,7 +1,7 @@
 <?php
 session_start();
 $user_id = $_SESSION['user_id'];
-require_once __DIR__ . '../../../helper/connection.php';
+require_once __DIR__ . '../../../../helper/connection.php';
     
 try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {

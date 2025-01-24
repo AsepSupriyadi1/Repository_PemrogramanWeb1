@@ -123,6 +123,29 @@ $modal_metadata = [
         'icon' => 'success'
     ],
 
+    // ============ BOOKMARK MESSAGE HANDLER ============
+
+    'bookmark_added_failed' => [
+        'title' => 'Failed',
+        'message' => 'Error adding bookmark',
+        'icon' => 'error'
+    ],
+    'bookmark_added_success' => [
+        'title' => 'Success',
+        'message' => 'Successfully added bookmark',
+        'icon' => 'success'
+    ],
+    'bookmark_deleted_failed' => [
+        'title' => 'Failed',
+        'message' => 'Error deleting bookmark',
+        'icon' => 'error'
+    ],
+    'bookmark_deleted_success' => [
+        'title' => 'Success',
+        'message' => 'Successfully deleted bookmark',
+        'icon' => 'success'
+    ],
+
     // ============ ERROR MESSAGE HANDLER ============
     'error' => [
         'title' => 'Failed',

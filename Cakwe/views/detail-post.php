@@ -1,11 +1,11 @@
 <?php
 session_start();
+$user_id = null;
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
+} else {
+    header('Location: /Cakwe/home?message=login_required');
 }
-// else{
-//     header('Location: /Cakwe/home');
-// }
 ?>
 <?php include 'process/post/functions.php' ?>
 <?php include 'helper/date-converter.php' ?>
@@ -113,9 +113,28 @@ $post_detail = getDetailPosts($decrypted_id);
                                     <img src="./asset/icons/share.svg" alt="share">
                                     <span class="l-regular-sm">Share</span>
                                 </div>
-                                <div class="d-flex column-gap-1 align-items-center">
-                                    <img src="./asset/icons/more.svg" alt="more">
-                                </div>
+                                <?php if ($user_id != null): ?>
+                                    <div class="dropdown">
+                                        <img src="./asset/icons/more.svg" alt="more" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                        <ul class="dropdown-menu p-2">
+                                            <li>
+                                                <a
+                                                    href="/Cakwe/process/post/controllers/bookmark-post.php?post_id=<?= $post_detail['post_id'] ?>">
+                                                    <div class="d-flex align-items-center dropdown-item p-2 column-gap-2">
+                                                        <?php if (isBookmarked($post_detail['post_id'], $user_id)): ?>
+                                                            <img src="./asset/icons/bookmark-filled.svg" alt="bookmark">
+                                                            <p class="l-regular-md">Unbookmark post</p>
+                                                        <?php else: ?>
+                                                            <img src="./asset/icons/bookmark.svg" alt="bookmark">
+                                                            <p class="l-regular-md">Bookmark post</p>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                         <div class="mt-3">

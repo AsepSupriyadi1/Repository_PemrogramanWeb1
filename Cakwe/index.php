@@ -1,5 +1,6 @@
 <?php
 session_start();
+$user_id = null;
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 }
@@ -74,8 +75,7 @@ if (isset($_SESSION['user_id'])) {
                                 <div class="px-3">
                                     <div class="d-flex align-items-center column-gap-1">
                                         <?php if ($user_detail['profile_picture'] == null): ?>
-                                            <img class="l-profile-picture-sm"
-                                                src="./asset/images/avatar_default.png"
+                                            <img class="l-profile-picture-sm" src="./asset/images/avatar_default.png"
                                                 alt="profile_picture">
                                         <?php else: ?>
                                             <img class="l-profile-picture-sm"
@@ -108,8 +108,7 @@ if (isset($_SESSION['user_id'])) {
                                 <?php if ($post['link'] != null): ?>
                                     <?php $embedUrl = getYouTubeEmbedUrl($post['link']); ?>
                                     <div class="l-post-image-container">
-                                        <iframe class="l-post-url"
-                                            src="<?= $embedUrl ?>" frameborder="0" allowfullscreen></iframe>
+                                        <iframe class="l-post-url" src=<?= $embedUrl ?> frameborder="0" allowfullscreen></iframe>
                                     </div>
                                 <?php endif; ?>
 
@@ -124,22 +123,28 @@ if (isset($_SESSION['user_id'])) {
                                             <img src="./asset/icons/share.svg" alt="share">
                                             <span class="l-regular-sm">Share</span>
                                         </div>
-                                        <?php if (isset($_SESSION['user_id'])):
-                                        ?>
+
+                                        <?php if ($user_id != null): ?>
                                             <div class="dropdown">
-                                                <img src="./asset/icons/more.svg" alt="more" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <img src="./asset/icons/more.svg" alt="more" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
                                                 <ul class="dropdown-menu p-2">
                                                     <li>
-                                                        <a href="/Cakwe/process/post/controllers/bookmark-post.php?post_id=<?= $post['post_id'] ?>">
-                                                            <div class="d-flex align-items-center dropdown-item p-2 column-gap-2">
-                                                                <img src="./asset/icons/bookmark.svg" alt="bookmark">
-                                                                <p>Bookmark post</p>
+                                                        <a
+                                                            href="/Cakwe/process/post/controllers/bookmark-post.php?post_id=<?= $post['post_id'] ?>">
+                                                            <div
+                                                                class="d-flex align-items-center dropdown-item p-2 column-gap-2">
+                                                                <?php if (isBookmarked($post['post_id'], $user_id)): ?>
+                                                                    <img src="./asset/icons/bookmark-filled.svg" alt="bookmark">
+                                                                    <p class="l-regular-md">Unbookmark post</p>
+                                                                <?php else: ?>
+                                                                    <img src="./asset/icons/bookmark.svg" alt="bookmark">
+                                                                    <p class="l-regular-md">Bookmark post</p>
+                                                                <?php endif; ?>
                                                             </div>
                                                         </a>
                                                     </li>
-                                                    <?php if ($post['user_id'] == $user_id):
-                                                    ?>
-                                                        <li>
+                                                            <li>
                                                             <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal"
                                                                 onclick="setDeleteUrl('/Cakwe/process/delete-post/controllers.php?post_id=<?= $post['post_id'] ?>')">
                                                                 <div class="d-flex align-items-center dropdown-item p-2 column-gap-2">
@@ -148,10 +153,9 @@ if (isset($_SESSION['user_id'])) {
                                                                 </div>
                                                             </a>
                                                         </li>
-                                                    <?php endif; ?>
                                                 </ul>
                                             </div>
-                                        <?php endif; ?>
+                                        <?php endif; ?> 
                                     </div>
                                 </div>
                             </div>
@@ -190,11 +194,6 @@ if (isset($_SESSION['user_id'])) {
         </div>
     </div>
 
-    <!-- Modal HTML embedded directly into document -->
-    <div id="ex1" class="modal">
-        <p>Thanks for clicking. That felt good.</p>
-        <a href="#" rel="modal:close">Close</a>
-    </div>
 
     <!-- Script Delete Post -->
     <script>
