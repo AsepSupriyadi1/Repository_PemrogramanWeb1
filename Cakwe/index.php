@@ -144,6 +144,15 @@ if (isset($_SESSION['user_id'])) {
                                                             </div>
                                                         </a>
                                                     </li>
+                                                            <li>
+                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                                                onclick="setDeleteUrl('/Cakwe/process/delete-post/controllers.php?post_id=<?= $post['post_id'] ?>')">
+                                                                <div class="d-flex align-items-center dropdown-item p-2 column-gap-2">
+                                                                    <img src="./asset/icons/trash.svg" alt="delete">
+                                                                    <p>Delete post</p>
+                                                                </div>
+                                                            </a>
+                                                        </li>
                                                 </ul>
                                             </div>
                                         <?php endif; ?> 
@@ -159,11 +168,40 @@ if (isset($_SESSION['user_id'])) {
             </div>
         </div>
 
+        <!-- Modal Delete Post -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this post?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <a href="#" id="confirmDeleteButton" class="btn btn-danger p-2">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <!-- Sidebar Kanan -->
         <div class="l-sidebar-right py-2 px-3">
             <?php include 'views/components/recent-post_component.php' ?>
         </div>
     </div>
+
+
+    <!-- Script Delete Post -->
+    <script>
+        function setDeleteUrl(url) {
+            const deleteButton = document.getElementById('confirmDeleteButton');
+            deleteButton.href = url;
+        }
+    </script>
 
     <!-- BOOTSTRAP -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
