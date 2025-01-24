@@ -1,11 +1,19 @@
 <?php
 session_start();
+
+$user_id = null;
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 } else {
     header('Location: /Cakwe/home?message=login_required');
 }
 ?>
+
+<?php include 'process/post/functions.php' ?>
+<?php include 'helper/date-converter.php' ?>
+<?php include 'helper/url-converter.php' ?>
+<?php include 'helper/security-helper.php' ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -79,27 +87,225 @@ if (isset($_SESSION['user_id'])) {
 
                     <form action="">
 
-                        <!-- TEXT INPUT -->
+                        <!-- POSTED BY THE USER -->
                         <div class="tab-content active" data-content='1'>
+                            <div class="d-flex flex-column row-gap-3">
+                                <?php foreach (getUserPosts() as $post): ?>
+                                    <?php $user_detail = getDetailUser($post['user_id']) ?>
+                                    <section class="d-flex border border-1 rounded l-post-item">
+                                        <div class="border-end">
+                                            <div class="p-3 text-center d-flex flex-column align-items-center gap-2">
+                                                <img src="./asset/icons/arrow-up_default.svg"
+                                                    alt="arrow-down_default"></img>
+                                                <span class="l-regular-md">500</span>
+                                                <img src="./asset/icons/arrow-down_default.svg"
+                                                    alt="arrow-down_default"></img>
+                                            </div>
+                                        </div>
+                                        <div class="l-w-full">
+                                            <div class="py-3">
+                                                <div class="px-3">
+                                                    <div class="d-flex align-items-center column-gap-1">
+                                                        <?php if ($user_detail['profile_picture'] == null): ?>
+                                                            <img class="l-profile-picture-sm"
+                                                                src="./asset/images/avatar_default.png" alt="profile_picture">
+                                                        <?php else: ?>
+                                                            <img class="l-profile-picture-sm"
+                                                                src="data:image/jpeg;base64,<?= base64_encode($user_detail['profile_picture']) ?>"
+                                                                alt="profile_picture">
+                                                        <?php endif; ?>
 
+                                                        <span class="l-regular-md"><?= $user_detail['full_name'] ?></span>
+                                                        <img src="./asset/icons/dot.png" alt="dot">
+                                                        <span
+                                                            class="l-light-sm"><?= timeAgo($post['created_at']) ?></span>
+                                                    </div>
+                                                    <div class="my-3">
+                                                        <?php $encryptedId = encryptId($post['post_id']); ?>
+                                                        <a href="/Cakwe/detail-post?id=<?= urlencode($encryptedId) ?>">
+                                                            <h1 class="l-medium-lg"><?= $post['title'] ?></h1>
+                                                        </a>
+                                                        <p class="l-paragraph"><?= $post['description'] ?></p>
+                                                    </div>
+                                                </div>
+
+                                                <?php if ($post['post_image'] != null): ?>
+                                                    <div class="l-post-image-container">
+                                                        <a href="">
+                                                            <img class="l-post-image"
+                                                                src="data:image/jpeg;base64,<?= base64_encode($post['post_image']) ?>"
+                                                                alt="post_image">
+                                                        </a>
+                                                    </div>
+                                                <?php endif; ?>
+                                                <?php if ($post['link'] != null): ?>
+                                                    <?php $embedUrl = getYouTubeEmbedUrl($post['link']); ?>
+                                                    <div class="l-post-image-container">
+                                                        <iframe class="l-post-url" src=<?= $embedUrl ?> frameborder="0"
+                                                            allowfullscreen></iframe>
+                                                    </div>
+                                                <?php endif; ?>
+
+
+                                                <div class="px-3 mt-2">
+                                                    <div class="d-flex column-gap-3 align-items-center">
+                                                        <div class="d-flex column-gap-1 align-items-center">
+                                                            <img src="./asset/icons/comment.svg" alt="comment">
+                                                            <span class="l-regular-sm">400 Comments</span>
+                                                        </div>
+                                                        <div class="d-flex column-gap-1 align-items-center">
+                                                            <img src="./asset/icons/share.svg" alt="share">
+                                                            <span class="l-regular-sm">Share</span>
+                                                        </div>
+                                                        <?php if ($user_id != null): ?>
+                                                            <div class="dropdown">
+                                                                <img src="./asset/icons/more.svg" alt="more"
+                                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <ul class="dropdown-menu p-2">
+                                                                    <li>
+                                                                        <a
+                                                                            href="/Cakwe/process/post/controllers/bookmark-post.php?post_id=<?= $post['post_id'] ?>">
+                                                                            <div
+                                                                                class="d-flex align-items-center dropdown-item p-2 column-gap-2">
+                                                                                <?php if (isBookmarked($post['post_id'], $user_id)): ?>
+                                                                                    <img src="./asset/icons/bookmark-filled.svg"
+                                                                                        alt="bookmark">
+                                                                                    <p class="l-regular-md">Unbookmark post</p>
+                                                                                <?php else: ?>
+                                                                                    <img src="./asset/icons/bookmark.svg"
+                                                                                        alt="bookmark">
+                                                                                    <p class="l-regular-md">Bookmark post</p>
+                                                                                <?php endif; ?>
+                                                                            </div>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
 
-                        <!-- IMAGES INPUT -->
+                        <!-- COMMENTED -->
                         <div class="tab-content" data-content='2'>
 
                         </div>
 
-                        <!-- URL INPUT -->
+                        <!-- SAVED -->
                         <div class="tab-content" data-content='3'>
+                            <div class="d-flex flex-column row-gap-3">
+                                <?php foreach (getBookmarkedPost() as $post): ?>
+                                    <?php $user_detail = getDetailUser($post['user_id']) ?>
+                                    <section class="d-flex border border-1 rounded l-post-item">
+                                        <div class="border-end">
+                                            <div class="p-3 text-center d-flex flex-column align-items-center gap-2">
+                                                <img src="./asset/icons/arrow-up_default.svg"
+                                                    alt="arrow-down_default"></img>
+                                                <span class="l-regular-md">500</span>
+                                                <img src="./asset/icons/arrow-down_default.svg"
+                                                    alt="arrow-down_default"></img>
+                                            </div>
+                                        </div>
+                                        <div class="l-w-full">
+                                            <div class="py-3">
+                                                <div class="px-3">
+                                                    <div class="d-flex align-items-center column-gap-1">
+                                                        <?php if ($user_detail['profile_picture'] == null): ?>
+                                                            <img class="l-profile-picture-sm"
+                                                                src="./asset/images/avatar_default.png" alt="profile_picture">
+                                                        <?php else: ?>
+                                                            <img class="l-profile-picture-sm"
+                                                                src="data:image/jpeg;base64,<?= base64_encode($user_detail['profile_picture']) ?>"
+                                                                alt="profile_picture">
+                                                        <?php endif; ?>
 
+                                                        <span class="l-regular-md"><?= $user_detail['full_name'] ?></span>
+                                                        <img src="./asset/icons/dot.png" alt="dot">
+                                                        <span
+                                                            class="l-light-sm"><?= timeAgo($post['bookmarked_at']) ?></span>
+                                                    </div>
+                                                    <div class="my-3">
+                                                        <?php $encryptedId = encryptId($post['post_id']); ?>
+                                                        <a href="/Cakwe/detail-post?id=<?= urlencode($encryptedId) ?>">
+                                                            <h1 class="l-medium-lg"><?= $post['title'] ?></h1>
+                                                        </a>
+                                                        <p class="l-paragraph"><?= $post['description'] ?></p>
+                                                    </div>
+                                                </div>
+
+                                                <?php if ($post['post_image'] != null): ?>
+                                                    <div class="l-post-image-container">
+                                                        <a href="">
+                                                            <img class="l-post-image"
+                                                                src="data:image/jpeg;base64,<?= base64_encode($post['post_image']) ?>"
+                                                                alt="post_image">
+                                                        </a>
+                                                    </div>
+                                                <?php endif; ?>
+                                                <?php if ($post['link'] != null): ?>
+                                                    <?php $embedUrl = getYouTubeEmbedUrl($post['link']); ?>
+                                                    <div class="l-post-image-container">
+                                                        <iframe class="l-post-url" src=<?= $embedUrl ?> frameborder="0"
+                                                            allowfullscreen></iframe>
+                                                    </div>
+                                                <?php endif; ?>
+
+
+                                                <div class="px-3 mt-2">
+                                                    <div class="d-flex column-gap-3 align-items-center">
+                                                        <div class="d-flex column-gap-1 align-items-center">
+                                                            <img src="./asset/icons/comment.svg" alt="comment">
+                                                            <span class="l-regular-sm">400 Comments</span>
+                                                        </div>
+                                                        <div class="d-flex column-gap-1 align-items-center">
+                                                            <img src="./asset/icons/share.svg" alt="share">
+                                                            <span class="l-regular-sm">Share</span>
+                                                        </div>
+                                                        <?php if ($user_id != null): ?>
+                                                            <div class="dropdown">
+                                                                <img src="./asset/icons/more.svg" alt="more"
+                                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                                <ul class="dropdown-menu p-2">
+                                                                    <li>
+                                                                        <a
+                                                                            href="/Cakwe/process/post/controllers/bookmark-post.php?post_id=<?= $post['post_id'] ?>">
+                                                                            <div
+                                                                                class="d-flex align-items-center dropdown-item p-2 column-gap-2">
+                                                                                <?php if (isBookmarked($post['post_id'], $user_id)): ?>
+                                                                                    <img src="./asset/icons/bookmark-filled.svg"
+                                                                                        alt="bookmark">
+                                                                                    <p class="l-regular-md">Unbookmark post</p>
+                                                                                <?php else: ?>
+                                                                                    <img src="./asset/icons/bookmark.svg"
+                                                                                        alt="bookmark">
+                                                                                    <p class="l-regular-md">Bookmark post</p>
+                                                                                <?php endif; ?>
+                                                                            </div>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
 
-                        <!-- URL INPUT -->
+                        <!-- UPVOTE -->
                         <div class="tab-content" data-content='4'>
 
                         </div>
 
-                        <!-- URL INPUT -->
+                        <!-- DOWNVOTE -->
                         <div class="tab-content" data-content='5'>
 
                         </div>
@@ -193,7 +399,7 @@ if (isset($_SESSION['user_id'])) {
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-    <script src="./jqueries/tabs.js"></script>
+    <script src="./asset/jqueries/tabs.js"></script>
 
     <!-- Include SweetAlert CSS and JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>

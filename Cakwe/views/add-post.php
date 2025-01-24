@@ -60,7 +60,7 @@ else{
                     
                     <!-- TEXT INPUT -->
                     <div class="tab-content active" data-content='1'>
-                        <form id="" method="POST" action="/Cakwe/process/post/controllers.php" enctype="multipart/form-data">
+                        <form id="" method="POST" action="/Cakwe/process/post/controllers/add-post.php" enctype="multipart/form-data">
                             <div class="d-flex flex-column row-gap-3">
                                 <div>
                                     <label class="l-regular-md-input-text mb-2" for="title">Title<span
@@ -85,7 +85,7 @@ else{
                     
                     <!-- IMAGES INPUT -->
                     <div class="tab-content" data-content='2'>
-                        <form id="" method="POST" action="/Cakwe/process/post/controllers.php" enctype="multipart/form-data">
+                        <form id="" method="POST" action="/Cakwe/process/post/controllers/add-post.php" enctype="multipart/form-data">
                             <div class="d-flex flex-column row-gap-3">
                                 <div>
                                     <label class="l-regular-md-input-text mb-2" for="title">Title<span
@@ -107,7 +107,7 @@ else{
 
                     <!-- URL INPUT -->
                     <div class="tab-content" data-content='3'>
-                        <form id="" method="POST" action="/Cakwe/process/post/controllers.php" enctype="multipart/form-data">
+                        <form id="" method="POST" action="/Cakwe/process/post/controllers/add-post.php" enctype="multipart/form-data">
                             <div class="d-flex flex-column row-gap-3">
                                 <div>
                                     <label class="l-regular-md-input-text mb-2" for="title">Title<span
