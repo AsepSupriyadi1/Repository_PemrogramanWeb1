@@ -26,6 +26,12 @@ $modal_metadata = [
         'message' => 'You have successfully logged in.',
         'icon' => 'success'
     ],
+
+    'login_required' => [
+        'title' => 'Failed',
+        'message' => 'You have to log in in order to proceed forward!',
+        'icon' => 'error'
+    ],
     'invalid_password' => [
         'title' => 'Failed',
         'message' => 'Email or password is incorrect.',
@@ -112,7 +118,8 @@ function showAlert($message, $errors)
             }
         });
     </script>";
-};
+}
+;
 
 
 

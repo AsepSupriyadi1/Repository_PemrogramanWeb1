@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../helper/connection.php';
+require_once __DIR__ . '../../../../helper/connection.php';
 
 try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {

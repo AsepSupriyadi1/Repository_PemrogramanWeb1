@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+}
+else{
+    header('Location: /Cakwe/home?message=login_required');
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -51,7 +60,7 @@
                     
                     <!-- TEXT INPUT -->
                     <div class="tab-content active" data-content='1'>
-                        <form id="" method="POST" action="/Cakwe/process/add-post.php" enctype="multipart/form-data">
+                        <form id="" method="POST" action="/Cakwe/process/post/controllers.php" enctype="multipart/form-data">
                             <div class="d-flex flex-column row-gap-3">
                                 <div>
                                     <label class="l-regular-md-input-text mb-2" for="title">Title<span
@@ -76,7 +85,7 @@
                     
                     <!-- IMAGES INPUT -->
                     <div class="tab-content" data-content='2'>
-                        <form id="" method="POST" action="/Cakwe/process/add-post.php" enctype="multipart/form-data">
+                        <form id="" method="POST" action="/Cakwe/process/post/controllers.php" enctype="multipart/form-data">
                             <div class="d-flex flex-column row-gap-3">
                                 <div>
                                     <label class="l-regular-md-input-text mb-2" for="title">Title<span
@@ -98,7 +107,7 @@
 
                     <!-- URL INPUT -->
                     <div class="tab-content" data-content='3'>
-                        <form id="" method="POST" action="/Cakwe/process/add-post.php" enctype="multipart/form-data">
+                        <form id="" method="POST" action="/Cakwe/process/post/controllers.php" enctype="multipart/form-data">
                             <div class="d-flex flex-column row-gap-3">
                                 <div>
                                     <label class="l-regular-md-input-text mb-2" for="title">Title<span

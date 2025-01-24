@@ -10,6 +10,11 @@ try {
     // Ini adalah global variable, dan bisa diakses di semua file PHP yang membutuhkan koneksi ke database
     $conn = new mysqli($servername, $username, $password, $database);
 
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
     // Tampilkan pesan sukses jika koneksi berhasil
     echo "<script>console.log('Database connected successfully');</script>";
 

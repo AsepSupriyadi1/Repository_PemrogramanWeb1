@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../helper/connection.php';
+require_once __DIR__ . '../../../../helper/connection.php';
 session_start();
 
 try {

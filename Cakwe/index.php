@@ -1,4 +1,17 @@
-<?php include 'helper/connection.php' ?>
+<?php
+session_start();
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+}
+// else{
+//     header('Location: /Cakwe/home');
+// }
+?>
+<?php include 'process/recent-post/functions.php' ?>
+<?php include 'process/post/functions.php' ?>
+<?php include 'helper/date-converter.php' ?>
+<?php include 'helper/url-converter.php' ?>
+<?php include 'helper/security-helper.php' ?>
 
 <!doctype html>
 <html lang="en">
@@ -45,53 +58,84 @@
             <!-- CONTAINER POST ITEM -->
             <div class="d-flex flex-column row-gap-3 p-4 py-2">
                 <!-- POST ITEM -->
+                <?php foreach (getPosts() as $post): ?>
 
-                <section class="d-flex border border-1 rounded l-post-item">
-                    <div class="border-end">
-                        <div class="p-3 text-center d-flex flex-column align-items-center gap-2">
-                            <img src="./asset/icons/arrow-up_default.svg" alt="arrow-up_default"></img>
-                            <span class="l-regular-md">500</span>
-                            <img src="./asset/icons/arrow-down_default.svg" alt="arrow-down_default"></img>
-                        </div>
-                    </div>
-                    <div class="container-fluid">
-                        <div class="py-3">
-                            <div class="px-3">
-                                <div class="d-flex align-items-center column-gap-1">
-                                    <img class="me-2" src="./asset/images/default_user.png" alt="default_user">
-                                    <span class="l-regular-md">Rin Shima</span>
-                                    <img src="./asset/icons/dot.png" alt="dot">
-                                    <span class="l-light-sm">Posted 3 hours ago</span>
-                                </div>
-                                <a href="">
-                                    <h1 class="l-medium-lg my-2">Ketika Semua Orang Dievakuasi, Hanya Kuda Yang Bisa
-                                        Diwawancarai</h1>
-                                </a>
-                            </div>
-                            <div class="l-post-image-container">
-                                <a href="">
-                                    <div class="overlay"></div>
-                                    <img class="l-post-image" src="./asset/images/example-meme-01.png" alt="">
-                                </a>
-                            </div>
-                            <div class="px-3 mt-2">
-                                <div class="d-flex column-gap-3 align-items-center">
-                                    <div class="d-flex column-gap-1 align-items-center">
-                                        <img src="./asset/icons/comment.svg" alt="comment">
-                                        <span class="l-regular-sm">400 Comments</span>
-                                    </div>
-                                    <div class="d-flex column-gap-1 align-items-center">
-                                        <img src="./asset/icons/share.svg" alt="share">
-                                        <span class="l-regular-sm">Share</span>
-                                    </div>
-                                    <div class="d-flex column-gap-1 align-items-center">
-                                        <img src="./asset/icons/more.svg" alt="more">
-                                    </div>
-                                </div>
+                    <?php $user_detail = getDetailUser($post['user_id']) ?>
+                    <section class="d-flex border border-1 rounded l-post-item">
+                        <div class="border-end">
+                            <div class="p-3 text-center d-flex flex-column align-items-center gap-2">
+                                <img src="./asset/icons/arrow-up_default.svg" alt="arrow-down_default"></img>
+                                <span class="l-regular-md">500</span>
+                                <img src="./asset/icons/arrow-down_default.svg" alt="arrow-down_default"></img>
                             </div>
                         </div>
-                    </div>
-                </section>
+                        <div class="l-w-full">
+                            <div class="py-3">
+                                <div class="px-3">
+                                    <div class="d-flex align-items-center column-gap-1">
+                                        <?php if($user_detail['profile_picture'] == null): ?>
+                                            <img class="l-profile-picture-sm"
+                                            src="./asset/images/avatar_default.png"
+                                            alt="profile_picture">
+                                        <?php else: ?>
+                                            <img class="l-profile-picture-sm"
+                                            src="data:image/jpeg;base64,<?= base64_encode($user_detail['profile_picture']) ?>"
+                                            alt="profile_picture">
+                                        <?php endif; ?>
+                                      
+                                        <span class="l-regular-md"><?= $user_detail['full_name'] ?></span>
+                                        <img src="./asset/icons/dot.png" alt="dot">
+                                        <span class="l-light-sm"><?= timeAgo($post['created_at']) ?></span>
+                                    </div>
+                                    <div class="my-3">
+                                        <?php $encryptedId = encryptId($post['post_id']); ?>
+                                        <a href="/Cakwe/detail-post?id=<?= urlencode( $encryptedId) ?>">
+                                            <h1 class="l-medium-lg"><?= $post['title'] ?></h1>
+                                        </a>
+                                        <p class="l-paragraph"><?= $post['description'] ?></p>
+                                    </div>
+                                </div>
+
+                                <?php if ($post['post_image'] != null): ?>
+                                    <div class="l-post-image-container">
+                                        <a href="">
+                                            <img class="l-post-image"
+                                                src="data:image/jpeg;base64,<?= base64_encode($post['post_image']) ?>"
+                                                alt="post_image">
+                                        </a>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if ($post['link'] != null): ?>
+                                    <?php $embedUrl = getYouTubeEmbedUrl($post['link']); ?>
+                                    <div class="l-post-image-container">
+                                        <iframe class="l-post-url"
+                                            src="<?= $embedUrl ?>" frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                <?php endif; ?>
+
+
+                                <div class="px-3 mt-2">
+                                    <div class="d-flex column-gap-3 align-items-center">
+                                        <div class="d-flex column-gap-1 align-items-center">
+                                            <img src="./asset/icons/comment.svg" alt="comment">
+                                            <span class="l-regular-sm">400 Comments</span>
+                                        </div>
+                                        <div class="d-flex column-gap-1 align-items-center">
+                                            <img src="./asset/icons/share.svg" alt="share">
+                                            <span class="l-regular-sm">Share</span>
+                                        </div>
+                                        <div class="d-flex column-gap-1 align-items-center">
+                                            <img src="./asset/icons/more.svg" alt="more">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+                <?php endforeach; ?>
+
             </div>
         </div>
 
@@ -116,8 +160,10 @@
     <!-- Include SweetAlert CSS and JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
+
     <!-- ALERT HELPER -->
     <?php include 'helper/alert-helper.php' ?>
+
 </body>
 
 </html>

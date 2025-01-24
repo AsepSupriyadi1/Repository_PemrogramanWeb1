@@ -1,9 +1,10 @@
 <?php
-session_start();
+include 'process/account/functions/get-detail-user.php';
 $isLoggedIn = isset($_SESSION['user_id']);
+$user_detail = null;
 
 if ($isLoggedIn) {
-    include 'process/get-detail-user.php';
+    $user_detail = getDetailUser($_SESSION['user_id']);
 }
 ?>
 
@@ -22,7 +23,7 @@ if ($isLoggedIn) {
             <button type="button" class="btn l-btn-primary ms-auto" data-bs-toggle="modal"
                 data-bs-target="#loginModal">Login</button>
         <?php elseif ($isLoggedIn): ?>
-            <a href="/Cakwe/process/logout.php" class="btn l-btn-primary ms-auto">Logout</a>
+            <a href="/Cakwe/process/account/controllers/logout.php" class="btn l-btn-primary ms-auto">Logout</a>
         <?php endif; ?>
 
     </div>

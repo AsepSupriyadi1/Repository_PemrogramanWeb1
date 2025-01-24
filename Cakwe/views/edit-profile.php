@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+} else {
+    header('Location: /Cakwe/home?message=login_required');
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -47,30 +55,35 @@
                 <div>
                     <h2 class="l-medium-lg my-4">Avatar</h2>
 
-                    <form method="POST" action="/Cakwe/process/profile-edit.php" enctype="multipart/form-data">
+                    <form method="POST" action="/Cakwe/process/account/controllers/profile-edit.php"
+                        enctype="multipart/form-data">
                         <div class="d-flex align-items-center column-gap-2 my-4">
-                            <img class="l-profile-picture" src="data:image/jpeg;base64,<?= base64_encode($profile_picture) ?>" alt="photo_profile">
+                            <img class="l-profile-picture"
+                                src="data:image/jpeg;base64,<?= base64_encode($user_detail['profile_picture']) ?>"
+                                alt="photo_profile">
                             <div>
-                                <input type="file" name="profile_picture" accept="image/*" class="form-control l-p-input-md rounded-2">
-                                <button type="submit" class="btn l-btn-primary ms-auto align-self-end mt-2">Change Avatar</button>
+                                <input type="file" name="profile_picture" accept="image/*"
+                                    class="form-control l-p-input-md rounded-2">
+                                <button type="submit" class="btn l-btn-primary ms-auto align-self-end mt-2">Change
+                                    Avatar</button>
                             </div>
                         </div>
                     </form>
 
                     <h2 class="l-medium-lg my-4">General</h2>
 
-                    <form method="POST" action="/Cakwe/process/profile-edit.php">
+                    <form method="POST" action="/Cakwe/process/account/controllers/profile-edit.php">
                         <div class=" d-flex flex-column row-gap-3">
                             <div>
-                                <input class="form-control l-p-input-md l-regular-md-input-text rounded-2"
-                                    type="text" name="full_name" id="full_name" placeholder="Enter name.." value="<?= $full_name ?>"
-                                    required>
+                                <input class="form-control l-p-input-md l-regular-md-input-text rounded-2" type="text"
+                                    name="full_name" id="full_name" placeholder="Enter name.."
+                                    value="<?= $user_detail['full_name'] ?>" required>
                             </div>
 
                             <div>
-                                <textarea class="form-control l-regular-md-input-text l-p-input-md rounded-2"
-                                    name="bio" id="bio" placeholder="Enter description..." rows="10"
-                                    required><?= $bio ?></textarea>
+                                <textarea class="form-control l-regular-md-input-text l-p-input-md rounded-2" name="bio"
+                                    id="bio" placeholder="Enter description..." rows="10"
+                                    required><?= $user_detail['bio'] ?></textarea>
                             </div>
                             <button type="submit" class="btn l-btn-primary ms-auto align-self-end">Submit</button>
                         </div>

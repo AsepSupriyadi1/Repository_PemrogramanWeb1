@@ -1,3 +1,22 @@
+<?php
+session_start();
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+}
+// else{
+//     header('Location: /Cakwe/home');
+// }
+?>
+<?php include 'process/post/functions.php' ?>
+<?php include 'helper/date-converter.php' ?>
+<?php include 'helper/url-converter.php' ?>
+<?php include 'helper/security-helper.php' ?>
+
+<?php
+$decrypted_id = decryptId($_GET['id']);
+$post_detail = getDetailPosts($decrypted_id);
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -30,6 +49,7 @@
 
 <body>
     <?php include 'views/components/navbar_component.php' ?>
+    <?php addToRecentPost($decrypted_id, $user_id) ?>
 
     <!-- Main Content -->
     <div class="l-main">
@@ -37,32 +57,52 @@
         <?php include 'views/components/sidebar_component.php' ?>
 
         <!-- Container Content Tengah (Scroll) -->
+
         <div class="l-content">
             <!-- DETAIL POST -->
             <div class="d-flex">
                 <div class="p-3">
-                    <img class="l-back-button" src="./asset/icons/back-button.svg" alt="arrow-down_default"></img>
+                    <a href="/Cakwe/">
+                        <img class="l-back-button" src="./asset/icons/back-button.svg" alt="arrow-down_default"></img>
+                    </a>
                 </div>
-                <div class="">
+                <div class="l-w-full">
                     <div class="py-3">
                         <div class="">
                             <div class="d-flex align-items-center column-gap-1">
-                                <img class="me-2" src="./asset/images/default_user.png" alt="default_user">
-                                <span class="l-regular-md">Rin Shima</span>
+                                <?php if ($user_detail['profile_picture'] == null): ?>
+                                    <img class="l-profile-picture-sm" src="./asset/images/avatar_default.png"
+                                        alt="profile_picture">
+                                <?php else: ?>
+                                    <img class="l-profile-picture-sm"
+                                        src="data:image/jpeg;base64,<?= base64_encode($user_detail['profile_picture']) ?>"
+                                        alt="profile_picture">
+                                <?php endif; ?>
+
+                                <span class="l-regular-md"><?= $user_detail['full_name'] ?></span>
                                 <img src="./asset/icons/dot.png" alt="dot">
-                                <span class="l-light-sm">Posted 3 hours ago</span>
+                                <span class="l-light-sm"><?= timeAgo($post_detail['created_at']) ?></span>
                             </div>
-                            <a href="">
-                                <h1 class="l-medium-lg my-2">Ketika Semua Orang Dievakuasi, Hanya Kuda Yang Bisa
-                                    Diwawancarai</h1>
-                            </a>
+                            <div class="my-3">
+                                <h1 class="l-medium-lg"><?= $post_detail['title'] ?></h1>
+                                <p class="l-paragraph"><?= $post_detail['description'] ?></p>
+                            </div>
                         </div>
-                        <div class="l-post-image-container">
-                            <a href="">
-                                <div class="overlay"></div>
-                                <img class="l-post-image" src="./asset/images/example-meme-01.png" alt="">
-                            </a>
-                        </div>
+                        <?php if ($post_detail['post_image'] != null): ?>
+                            <div class="l-post-image-container">
+                                <a href="">
+                                    <img class="l-post-image"
+                                        src="data:image/jpeg;base64,<?= base64_encode($post_detail['post_image']) ?>"
+                                        alt="post_image">
+                                </a>
+                            </div>
+                        <?php endif; ?>
+                        <?php if ($post_detail['link'] != null): ?>
+                            <?php $embedUrl = getYouTubeEmbedUrl($post_detail['link']); ?>
+                            <div class="l-post-image-container">
+                                <iframe class="l-post-url" src="<?= $embedUrl ?>" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                        <?php endif; ?>
                         <div class="mt-3">
                             <div class="d-flex column-gap-3 align-items-center">
                                 <div class="d-flex column-gap-1 align-items-center">

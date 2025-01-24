@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];
+} else {
+    header('Location: /Cakwe/home?message=login_required');
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -48,12 +56,14 @@
             <div class="p-4">
 
                 <div class="d-flex align-items-center column-gap-2">
-                    <img class="l-profile-picture" src="data:image/jpeg;base64,<?= base64_encode($profile_picture) ?>" alt="photo_profile">
+                    <img class="l-profile-picture"
+                        src="data:image/jpeg;base64,<?= base64_encode($user_detail['profile_picture']) ?>"
+                        alt="photo_profile">
                     <div>
-                        <h4 class="l-medium-xl"><?= $full_name ?></h4>
+                        <h4 class="l-medium-xl"><?= $user_detail['full_name'] ?></h4>
                         <div class="mt-2">
                             <h5 class="l-medium-md">Bio:</h5>
-                            <p class="l-regular-md"><?= $bio ?></p>
+                            <p class="l-regular-md"><?= $user_detail['bio'] ?></p>
                         </div>
                     </div>
                 </div>

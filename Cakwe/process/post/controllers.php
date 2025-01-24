@@ -1,16 +1,11 @@
 <?php
-require_once __DIR__ . '/../helper/connection.php';
 session_start();
-
+$user_id = $_SESSION['user_id'];
+require_once __DIR__ . '../../../helper/connection.php';
+    
 try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Validasi user login
-        if (!isset($_SESSION['user_id'])) {
-            header("Location: /Cakwe/home?message=post_not_login");
-            exit;
-        }
-
-        $user_id = $_SESSION['user_id'];
         $title = filter_input(INPUT_POST, 'title', FILTER_SANITIZE_STRING);
         $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
         $link = filter_input(INPUT_POST, 'link', FILTER_VALIDATE_URL);
@@ -32,7 +27,7 @@ try {
         }
 
         // Query untuk menyimpan data post
-        $sql = "INSERT INTO post (title, description, post_image, link, user_id) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO tb_posts (title, description, post_image, link, user_id) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ssssi", $title, $description, $post_image, $link, $user_id);
 

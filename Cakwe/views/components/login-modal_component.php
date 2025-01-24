@@ -14,7 +14,7 @@
                     </p>
                 </div>
                 <div>
-                    <form id="loginForm" method="POST" action="/Cakwe/process/login.php">
+                    <form id="loginForm" method="POST" action="/Cakwe/process/account/controllers/login.php">
                         <div class="my-3 d-flex flex-column row-gap-3">
                             <div>
                                 <label class="l-regular-md-input-text mb-2" for="email">Email<span
