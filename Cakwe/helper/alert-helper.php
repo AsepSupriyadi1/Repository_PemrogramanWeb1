@@ -85,11 +85,42 @@ $modal_metadata = [
         'message' => 'Post failed to upload',
         'icon' => 'error'
     ],
-
     'post_not_login' => [
         'title' => 'Failed',
         'message' => 'User not logged in',
         'icon' => 'error'
+    ],
+    'post_delete_success' => [
+        'title' => 'Success',
+        'message' => 'Delete Post Successfully',
+        'icon' => 'success'
+    ],
+    'post_delete_failed' => [
+        'title' => 'Failed',
+        'message' => 'Failed to Delete Post',
+        'icon' => 'error'
+    ],
+
+    // ============ BOOKMARK MESSAGE HANDLER ============
+    'bookmark_added_failed' => [
+        'title' => 'Failed',
+        'message' => 'Error adding bookmark',
+        'icon' => 'error'
+    ],
+    'bookmark_added_success' => [
+        'title' => 'Success',
+        'message' => 'Successfully added bookmark',
+        'icon' => 'success'
+    ],
+    'bookmark_deleted_failed' => [
+        'title' => 'Failed',
+        'message' => 'Error deleting bookmark',
+        'icon' => 'error'
+    ],
+    'bookmark_deleted_success' => [
+        'title' => 'Success',
+        'message' => 'Successfully deleted bookmark',
+        'icon' => 'success'
     ],
 
     // ============ ERROR MESSAGE HANDLER ============
@@ -118,8 +149,7 @@ function showAlert($message, $errors)
             }
         });
     </script>";
-}
-;
+};
 
 
 

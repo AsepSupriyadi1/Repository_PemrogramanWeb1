@@ -73,23 +73,23 @@ if (isset($_SESSION['user_id'])) {
                             <div class="py-3">
                                 <div class="px-3">
                                     <div class="d-flex align-items-center column-gap-1">
-                                        <?php if($user_detail['profile_picture'] == null): ?>
+                                        <?php if ($user_detail['profile_picture'] == null): ?>
                                             <img class="l-profile-picture-sm"
-                                            src="./asset/images/avatar_default.png"
-                                            alt="profile_picture">
+                                                src="./asset/images/avatar_default.png"
+                                                alt="profile_picture">
                                         <?php else: ?>
                                             <img class="l-profile-picture-sm"
-                                            src="data:image/jpeg;base64,<?= base64_encode($user_detail['profile_picture']) ?>"
-                                            alt="profile_picture">
+                                                src="data:image/jpeg;base64,<?= base64_encode($user_detail['profile_picture']) ?>"
+                                                alt="profile_picture">
                                         <?php endif; ?>
-                                      
+
                                         <span class="l-regular-md"><?= $user_detail['full_name'] ?></span>
                                         <img src="./asset/icons/dot.png" alt="dot">
                                         <span class="l-light-sm"><?= timeAgo($post['created_at']) ?></span>
                                     </div>
                                     <div class="my-3">
                                         <?php $encryptedId = encryptId($post['post_id']); ?>
-                                        <a href="/Cakwe/detail-post?id=<?= urlencode( $encryptedId) ?>">
+                                        <a href="/Cakwe/detail-post?id=<?= urlencode($encryptedId) ?>">
                                             <h1 class="l-medium-lg"><?= $post['title'] ?></h1>
                                         </a>
                                         <p class="l-paragraph"><?= $post['description'] ?></p>
@@ -124,9 +124,34 @@ if (isset($_SESSION['user_id'])) {
                                             <img src="./asset/icons/share.svg" alt="share">
                                             <span class="l-regular-sm">Share</span>
                                         </div>
-                                        <div class="d-flex column-gap-1 align-items-center">
-                                            <img src="./asset/icons/more.svg" alt="more">
-                                        </div>
+                                        <?php if (isset($_SESSION['user_id'])):
+                                        ?>
+                                            <div class="dropdown">
+                                                <img src="./asset/icons/more.svg" alt="more" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <ul class="dropdown-menu p-2">
+                                                    <li>
+                                                        <a href="/Cakwe/process/post/controllers/bookmark-post.php?post_id=<?= $post['post_id'] ?>">
+                                                            <div class="d-flex align-items-center dropdown-item p-2 column-gap-2">
+                                                                <img src="./asset/icons/bookmark.svg" alt="bookmark">
+                                                                <p>Bookmark post</p>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <?php if ($post['user_id'] == $user_id):
+                                                    ?>
+                                                        <li>
+                                                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                                                onclick="setDeleteUrl('/Cakwe/process/delete-post/controllers.php?post_id=<?= $post['post_id'] ?>')">
+                                                                <div class="d-flex align-items-center dropdown-item p-2 column-gap-2">
+                                                                    <img src="./asset/icons/trash.svg" alt="delete">
+                                                                    <p>Delete post</p>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    <?php endif; ?>
+                                                </ul>
+                                            </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -138,6 +163,26 @@ if (isset($_SESSION['user_id'])) {
 
             </div>
         </div>
+
+        <!-- Modal Delete Post -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this post?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <a href="#" id="confirmDeleteButton" class="btn btn-danger p-2">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <!-- Sidebar Kanan -->
         <div class="l-sidebar-right py-2 px-3">
@@ -151,6 +196,13 @@ if (isset($_SESSION['user_id'])) {
         <a href="#" rel="modal:close">Close</a>
     </div>
 
+    <!-- Script Delete Post -->
+    <script>
+        function setDeleteUrl(url) {
+            const deleteButton = document.getElementById('confirmDeleteButton');
+            deleteButton.href = url;
+        }
+    </script>
 
     <!-- BOOTSTRAP -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
