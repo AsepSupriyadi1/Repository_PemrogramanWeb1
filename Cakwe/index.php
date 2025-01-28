@@ -61,7 +61,7 @@ if (isset($_SESSION['user_id'])) {
         <!-- Container Content Tengah (Scroll) -->
         <div class="l-content">
             <!-- CONTAINER POST ITEM -->
-            <div class="d-flex flex-column row-gap-3 p-4 py-2 lg-w-full">
+            <div class="d-flex flex-column row-gap-3 l-post-content lg-w-full">
                 <!-- POST ITEM -->
                 <?php foreach (getPosts() as $post): ?>
 

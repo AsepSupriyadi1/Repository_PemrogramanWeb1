@@ -62,7 +62,7 @@ $post_detail = getDetailPosts($decrypted_id);
 
         <div class="l-content">
             <!-- DETAIL POST -->
-            <div class="d-flex">
+            <div class="d-flex p-3">
                 <div class="p-3">
                     <a href="/Cakwe/">
                         <img class="l-back-button" src="./asset/icons/back-button.svg" alt="arrow-down_default"></img>

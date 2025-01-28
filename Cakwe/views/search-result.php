@@ -65,11 +65,11 @@ $posts = searchPosts($current_keyword);
                     <section class="d-flex border border-1 rounded l-post-item">
                         <div class="container-fluid">
                             <div class="row py-3 px-3 d-flex justify-content-between align-items-center">
-                                <div class="col-2">
+                                <div class="col-lg-2 text-center">
                                     <img class="l-search-not-found" src="./asset/images/search-not-found.png"
                                         alt="profile_picture">
                                 </div>
-                                <div class="col">
+                                <div class="col-lg-10">
                                     <div class="py-2">
                                         <h1 class="l-medium-lg">Hm... we couldn’t find any results for
                                             "<?= $_GET['keyword'] ?>"</h1>
@@ -138,7 +138,7 @@ $posts = searchPosts($current_keyword);
         </div>
 
         <!-- Sidebar Kanan -->
-        <div class="l-sidebar-right">
+        <div class="l-sidebar-right d-none d-lg-block">
             <div class="d-flex flex-column py-3">
                 <?php include 'views/components/recent-post_component.php' ?>
             </div>

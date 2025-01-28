@@ -107,6 +107,10 @@
 .l-w-full {
   width: 100%;
 }
+
+.l-post-content {
+  padding: 1rem 1.5rem;
+}
 /*  =============================== END OF IMAGES  ===============================  */
 
 /*  =============================== TABS  ===============================  */
@@ -276,7 +280,15 @@ details.comment:not([open]) .comment-heading::after {
     margin-left: 0; 
     margin-right: 0; 
     margin-top: 15%;
-    margin-bottom: 100px;
+    margin-bottom: 150%;
+    padding: 0;
+  }
+
+}
+
+@media (max-width: 575.98px) {
+  .l-post-content {
+    padding: 0;
   }
 }
 /*  =============================== END OF COMMENT SECTION  ===============================  */
