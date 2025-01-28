@@ -76,7 +76,7 @@ if (isset($_SESSION['user_id'])) {
 
                     <div class="ps-2">
 
-                        <h4 class="l-medium-xl"><?= $user_detail['full_name'] ?>
+                        <h4 class="l-name"><?= $user_detail['full_name'] ?>
                             <a class="btn l-btn-secondary ms-auto align-self-end d-lg-none"
                                 href="/Cakwe/edit-profile">Edit</a>
                         </h4>
@@ -125,11 +125,11 @@ if (isset($_SESSION['user_id'])) {
 
                 <div id="tab">
                     <nav class="d-flex column-gap-3 my-4">
-                        <span class="l-regular-lg active l-cursor-pointer" data-id='1'>Post</span>
-                        <span href="#" class="l-regular-lg l-cursor-pointer" data-id='2'>Comments</span>
-                        <span href="#" class="l-regular-lg l-cursor-pointer" data-id='3'>Saved</span>
-                        <span href="#" class="l-regular-lg l-cursor-pointer" data-id='4'>Upvoted</span>
-                        <span href="#" class="l-regular-lg l-cursor-pointer" data-id='5'>Downvoted</span>
+                        <span class="l-list active l-cursor-pointer" data-id='1'>Post</span>
+                        <span href="#" class=" l-list l-cursor-pointer" data-id='2'>Comments</span>
+                        <span href="#" class=" l-list l-cursor-pointer" data-id='3'>Saved</span>
+                        <span href="#" class=" l-list l-cursor-pointer" data-id='4'>Upvoted</span>
+                        <span href="#" class=" l-list l-cursor-pointer" data-id='5'>Downvoted</span>
                     </nav>
 
                     <form action="">

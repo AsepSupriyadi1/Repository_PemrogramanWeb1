@@ -470,4 +470,33 @@ textarea {
   object-fit: cover;
 }
 
+/* RESPONSIVE */
+
+.l-name {
+    font-size: var(--font-xl);
+    font-weight: var(--font-bold);
+}
+
+.l-list {
+  font-size: var(--font-lg);
+  font-weight: var(--font-regular);
+}
+
+@media (max-width: 991.98px) {
+  .l-regular-lg {
+    font-size: var(--font-sm);
+    font-weight: var(--font-regular);
+  }
+
+  .l-list {
+    font-size: var(--font-sm);
+    font-weight: var(--font-regular);
+  }
+
+  .l-name {
+    font-size: var(--font-lg);
+    font-weight: var(--font-bold);
+}
+}
+
 /*  =============================== END OF PROFILE  ===============================  */

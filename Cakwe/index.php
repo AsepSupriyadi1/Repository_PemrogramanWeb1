@@ -61,7 +61,7 @@ if (isset($_SESSION['user_id'])) {
         <!-- Container Content Tengah (Scroll) -->
         <div class="l-content">
             <!-- CONTAINER POST ITEM -->
-            <div class="d-flex flex-column row-gap-3 p-4 py-2">
+            <div class="d-flex flex-column row-gap-3 p-4 py-2 lg-w-full">
                 <!-- POST ITEM -->
                 <?php foreach (getPosts() as $post): ?>
 
@@ -177,7 +177,7 @@ if (isset($_SESSION['user_id'])) {
         </div>
 
         <!-- Sidebar Kanan -->
-        <div class="l-sidebar-right">
+        <div class="l-sidebar-right d-none d-lg-block">
             <div class="d-flex flex-column py-3">
                 <?php include 'views/components/recent-post_component.php' ?>
             </div>

@@ -164,7 +164,7 @@ $post_detail = getDetailPosts($decrypted_id);
 
                         </div>
                         <div>
-                            <div class="comment-thread">
+                            <div class="comment-thread mb-5">
                                 <!-- Comment 1 start -->
                                 <?php foreach (getCommentsByPostId($post_detail['post_id']) as $comment): ?>
 
@@ -407,7 +407,7 @@ $post_detail = getDetailPosts($decrypted_id);
         </div>
 
 
-        <div class="l-sidebar-right py-2 px-3">
+        <div class="l-sidebar-right py-2 px-3 d-none d-lg-block">
             <div class="d-flex flex-column py-3">
                 <?php include 'views/components/recent-post_component.php' ?>
             </div>
