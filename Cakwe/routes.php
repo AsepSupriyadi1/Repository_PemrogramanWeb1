@@ -31,7 +31,7 @@ if (isset($_GET['url'])) {
         case 'edit-profile':
             require 'views/edit-profile.php';
             break;
-        case 'search-result':
+        case 'search':
             require 'views/search-result.php';
             break;
         case 'friends-error':

@@ -6,6 +6,7 @@ require_once __DIR__ . '../../../../helper/routes.php';
 
 try {
     $post_id = filter_var($_GET['post_id'], FILTER_SANITIZE_STRING);
+    $author_id = filter_var($_GET['author_id'], FILTER_SANITIZE_STRING);
 
     if (isBookmarked($post_id, $user_id)) {
         // Tambahkan bookmark
@@ -23,8 +24,8 @@ try {
         }
     } else {
         // Tambahkan bookmark
-        $stmt = $conn->prepare("INSERT INTO tb_bookmark_post (post_id, user_id) VALUES (?, ?)");
-        $stmt->bind_param("ii", $post_id, $user_id);
+        $stmt = $conn->prepare("INSERT INTO tb_bookmark_post (post_id, user_id, author_id) VALUES (?, ?, ?)");
+        $stmt->bind_param("iii", $post_id, $user_id, $author_id);
 
         if ($stmt->execute()) {
             header("Location: /Cakwe/profile?message=bookmark_added_success");

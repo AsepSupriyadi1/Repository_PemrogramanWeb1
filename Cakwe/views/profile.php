@@ -20,7 +20,9 @@ if (isset($_SESSION['user_id'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cakwe | My Profile</title>
+    <title>Cakwe | Profile</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="./asset/images/logo_icon.png" />
 
     <!-- BASE URL -->
     <base href="http://localhost/Cakwe/">
@@ -64,19 +66,25 @@ if (isset($_SESSION['user_id'])) {
             <div class="p-4">
 
                 <div class="d-flex align-items-center column-gap-2">
-                    <img class="l-profile-picture"
-                        src="data:image/jpeg;base64,<?= base64_encode($user_detail['profile_picture']) ?>"
-                        alt="photo_profile">
-                            <div class="ps-2">
+                    <?php if ($user_detail['profile_picture'] == null): ?>
+                        <img class="l-profile-picture" src="./asset/images/avatar_default.png" alt="profile_picture">
+                    <?php else: ?>
+                        <img class="l-profile-picture"
+                            src="data:image/jpeg;base64,<?= base64_encode($user_detail['profile_picture']) ?>"
+                            alt="profile_picture">
+                    <?php endif; ?>
 
-                                <h4 class="l-medium-xl"><?= $user_detail['full_name'] ?>  
-                                    <a class="btn l-btn-secondary ms-auto align-self-end d-lg-none" href="/Cakwe/edit-profile">Edit</a> 
-                                </h4>                       
-                               
-                                <div class="mt-2">
-                                    <h5 class="l-medium-md">Bio:</h5>
-                                    <p class="l-regular-md"><?= $user_detail['bio'] ?></p>
-                                <div>
+                    <div class="ps-2">
+
+                        <h4 class="l-medium-xl"><?= $user_detail['full_name'] ?>
+                            <a class="btn l-btn-secondary ms-auto align-self-end d-lg-none"
+                                href="/Cakwe/edit-profile">Edit</a>
+                        </h4>
+
+                        <div class="mt-2">
+                            <h5 class="l-medium-md">Bio:</h5>
+                            <p class="l-regular-md"><?= $user_detail['bio'] ?></p>
+                            <div>
                             </div>
                         </div>
                     </div>
@@ -148,16 +156,17 @@ if (isset($_SESSION['user_id'])) {
                                                         <?php if ($user_detail['profile_picture'] == null): ?>
                                                             <img class="l-profile-picture-sm"
                                                                 src="./asset/images/avatar_default.png" alt="profile_picture">
-                                                        <?php else: ?>
+                                                        <?php elseif ($user_detail['profile_picture'] != null): ?>
                                                             <img class="l-profile-picture-sm"
                                                                 src="data:image/jpeg;base64,<?= base64_encode($user_detail['profile_picture']) ?>"
                                                                 alt="profile_picture">
                                                         <?php endif; ?>
 
-                                                        <span class="l-regular-md"><?= $user_detail['full_name'] ?></span>
+                                                        <span class="l-regular-md">
+                                                            <?= $post['user_id'] == $user_id ? "You" : $user_detail['full_name'] ?>
+                                                        </span>
                                                         <img src="./asset/icons/dot.png" alt="dot">
-                                                        <span
-                                                            class="l-light-sm"><?= timeAgo($post['created_at']) ?></span>
+                                                        <span class="l-light-sm"><?= timeAgo($post['created_at']) ?></span>
                                                     </div>
                                                     <div class="my-3">
                                                         <?php $encryptedId = encryptId($post['post_id']); ?>
@@ -218,6 +227,19 @@ if (isset($_SESSION['user_id'])) {
                                                                             </div>
                                                                         </a>
                                                                     </li>
+                                                                    <?php if (checkOwnership($post['post_id'], $user_id)): ?>
+                                                                        <li>
+                                                                            <a href="#" data-bs-toggle="modal"
+                                                                                data-bs-target="#deleteModal"
+                                                                                onclick="setDeleteUrl('/Cakwe/process/post/controllers/delete-post.php?post_id=<?= $post['post_id'] ?>')">
+                                                                                <div
+                                                                                    class="d-flex align-items-center dropdown-item p-2 column-gap-2">
+                                                                                    <img src="./asset/icons/trash.svg" alt="delete">
+                                                                                    <p class="l-regular-md">Delete post</p>
+                                                                                </div>
+                                                                            </a>
+                                                                        </li>
+                                                                    <?php endif; ?>
                                                                 </ul>
                                                             </div>
                                                         <?php endif; ?>
@@ -239,7 +261,7 @@ if (isset($_SESSION['user_id'])) {
                         <div class="tab-content" data-content='3'>
                             <div class="d-flex flex-column row-gap-3">
                                 <?php foreach (getBookmarkedPost() as $post): ?>
-                                    <?php $user_detail = getDetailUser($post['user_id']) ?>
+                                    <?php $author_user_detail = getDetailUser($post['author_id']) ?>
                                     <section class="d-flex border border-1 rounded l-post-item">
                                         <div class="border-end">
                                             <div class="p-3 text-center d-flex flex-column align-items-center gap-2">
@@ -254,16 +276,18 @@ if (isset($_SESSION['user_id'])) {
                                             <div class="py-3">
                                                 <div class="px-3">
                                                     <div class="d-flex align-items-center column-gap-1">
-                                                        <?php if ($user_detail['profile_picture'] == null): ?>
+                                                        <?php if ($author_user_detail['profile_picture'] == null): ?>
                                                             <img class="l-profile-picture-sm"
                                                                 src="./asset/images/avatar_default.png" alt="profile_picture">
                                                         <?php else: ?>
                                                             <img class="l-profile-picture-sm"
-                                                                src="data:image/jpeg;base64,<?= base64_encode($user_detail['profile_picture']) ?>"
+                                                                src="data:image/jpeg;base64,<?= base64_encode($author_user_detail['profile_picture']) ?>"
                                                                 alt="profile_picture">
                                                         <?php endif; ?>
 
-                                                        <span class="l-regular-md"><?= $user_detail['full_name'] ?></span>
+                                                        <span class="l-regular-md">
+                                                            <?= $post['user_id'] == $user_id ? "You" : $author_user_detail['full_name'] ?>
+                                                        </span>
                                                         <img src="./asset/icons/dot.png" alt="dot">
                                                         <span
                                                             class="l-light-sm"><?= timeAgo($post['bookmarked_at']) ?></span>
@@ -327,6 +351,19 @@ if (isset($_SESSION['user_id'])) {
                                                                             </div>
                                                                         </a>
                                                                     </li>
+                                                                    <?php if (checkOwnership($post['post_id'], $user_id)): ?>
+                                                                        <li>
+                                                                            <a href="#" data-bs-toggle="modal"
+                                                                                data-bs-target="#deleteModal"
+                                                                                onclick="setDeleteUrl('/Cakwe/process/post/controllers/delete-post.php?post_id=<?= $post['post_id'] ?>')">
+                                                                                <div
+                                                                                    class="d-flex align-items-center dropdown-item p-2 column-gap-2">
+                                                                                    <img src="./asset/icons/trash.svg" alt="delete">
+                                                                                    <p class="l-regular-md">Delete post</p>
+                                                                                </div>
+                                                                            </a>
+                                                                        </li>
+                                                                    <?php endif; ?>
                                                                 </ul>
                                                             </div>
                                                         <?php endif; ?>
@@ -417,7 +454,8 @@ if (isset($_SESSION['user_id'])) {
                                         <h4 class="l-regular-md">Profile</h4>
                                         <p class="l-light-md">Customize your profile</p>
                                     </div>
-                                    <a class="btn l-btn-secondary ms-auto align-self-end" href="/Cakwe/edit-profile">Edit</a>
+                                    <a class="btn l-btn-secondary ms-auto align-self-end"
+                                        href="/Cakwe/edit-profile">Edit</a>
                                 </div>
 
                             </div>
@@ -431,6 +469,8 @@ if (isset($_SESSION['user_id'])) {
         </div>
 
     </div>
+
+    <?php include 'views/components/delete-confirm-modal_component.php' ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

@@ -15,14 +15,24 @@ $recent_posts = getRecentPosts();
         <div class="d-flex flex-column row-gap-3 l-recent-post-container">
 
             <?php foreach (getRecentPosts() as $post): ?>
+                <?php $user_detail = getDetailUser($post['author_id']) ?>
                 <!-- ITERABLE ITEMS -->
                 <div class="d-flex column-gap-2 align-items-center py-2 ">
                     <div class="d-flex flex-column row-gap-2">
                         <div class="d-flex align-items-center column-gap-2">
-                            <img src="./asset/images/default_user.png" alt="default_user">
-                            <span class="l-regular-md">You viewed</span>
+                            <?php if ($user_detail['profile_picture'] == null): ?>
+                                <img class="l-profile-picture-sm" src="./asset/images/avatar_default.png" alt="profile_picture">
+                            <?php else: ?>
+                                <img class="l-profile-picture-sm"
+                                    src="data:image/jpeg;base64,<?= base64_encode($user_detail['profile_picture']) ?>"
+                                    alt="profile_picture">
+                            <?php endif; ?>
+
+                            <span class="l-regular-md">
+                                <?= $post['user_id'] == $user_id ? "You" : $user_detail['full_name'] ?>
+                            </span>
                             <img src="./asset/icons/dot.png" alt="dot">
-                            <span class="l-light-sm">7 minutes ago</span>
+                            <span class="l-light-sm">Viewed |  <?= timeAgo($post['created_at']) ?></span>
                         </div>
                         <?php $encryptedId = encryptId($post['post_id']); ?>
                         <a href="/Cakwe/detail-post?id=<?= urlencode($encryptedId) ?>">

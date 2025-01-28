@@ -13,7 +13,9 @@ if (isset($_SESSION['user_id'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cakwe | Home</title>
+    <title>Cakwe | Privacy policy</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="./asset/images/logo_icon.png" />
 
     <!-- BASE URL -->
     <base href="http://localhost/Cakwe/">

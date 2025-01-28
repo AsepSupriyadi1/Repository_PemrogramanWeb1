@@ -4,7 +4,7 @@ $user_id = $_SESSION['user_id'];
 require_once __DIR__ . '../../../helper/connection.php';
 
 try {
-    // Query untuk menyimpan data post
+    // Delete all recent posts
     $sql = "DELETE FROM tb_recent_post WHERE user_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $user_id);

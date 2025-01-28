@@ -2,7 +2,14 @@
 session_start();
 $user_id = $_SESSION['user_id'];
 require_once __DIR__ . '../../../../helper/connection.php';
-    
+
+// Function to validate YouTube URL
+function isValidYoutubeUrl($url)
+{
+    $pattern = '/^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[a-zA-Z0-9_-]+/';
+    return preg_match($pattern, $url);
+}
+
 try {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Validasi user login
@@ -15,9 +22,19 @@ try {
             throw new Exception('Title is required');
         }
 
+        // Validate YouTube URL if link is provided
+        if ($link && !isValidYoutubeUrl($link)) {
+            throw new Exception('Only YouTube links are allowed');
+        }
+
         // Validasi dan konversi gambar ke BLOB
         $post_image = null;
         if ($image && $image['error'] === UPLOAD_ERR_OK) {
+            // Check file size - 2MB maximum
+            if ($image['size'] > 2097152) {
+                throw new Exception('Image size must be less than 2MB');
+            }
+
             $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
             if (!in_array($image['type'], $allowed_types)) {
                 throw new Exception('Invalid image type');
@@ -40,6 +57,5 @@ try {
     }
 } catch (Exception $e) {
     header("Location: /Cakwe/home?message=post_failed");
-    header("Location: /Cakwe/error?message=" . $e->getMessage());
     exit();
 }

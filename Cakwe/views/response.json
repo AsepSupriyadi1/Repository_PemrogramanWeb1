@@ -1,0 +1,36 @@
+{
+    "total_users_previous_month": 200,
+    "total_users_current_month": 120,
+    "total_activities_previous_month": 200,
+    "total_activities_current_month": 200,
+    "activities": [
+        {
+            "date": "2025-01-21",
+            "activity_count": 120
+        },
+        {
+            "date": "2025-01-22",
+            "activity_count": 135
+        },
+        {
+            "date": "2025-01-23",
+            "activity_count": 140
+        },
+        {
+            "date": "2025-01-24",
+            "activity_count": 110
+        },
+        {
+            "date": "2025-01-25",
+            "activity_count": 95
+        },
+        {
+            "date": "2025-01-26",
+            "activity_count": 130
+        },
+        {
+            "date": "2025-01-27",
+            "activity_count": 150
+        }
+    ]
+}

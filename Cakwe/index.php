@@ -22,6 +22,10 @@ if (isset($_SESSION['user_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cakwe | Home</title>
 
+    <link rel="shortcut icon" type="image/x-icon" href="./asset/images/logo_icon.png" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="./asset/images/logo_icon.png" />
+
     <!-- BOOTSTRAP -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -83,7 +87,9 @@ if (isset($_SESSION['user_id'])) {
                                                 alt="profile_picture">
                                         <?php endif; ?>
 
-                                        <span class="l-regular-md"><?= $user_detail['full_name'] ?></span>
+                                        <span class="l-regular-md">
+                                            <?= $post['user_id'] == $user_id ? "You" : $user_detail['full_name'] ?>
+                                        </span>
                                         <img src="./asset/icons/dot.png" alt="dot">
                                         <span class="l-light-sm"><?= timeAgo($post['created_at']) ?></span>
                                     </div>
@@ -112,7 +118,6 @@ if (isset($_SESSION['user_id'])) {
                                     </div>
                                 <?php endif; ?>
 
-
                                 <div class="px-3 mt-2">
                                     <div class="d-flex column-gap-3 align-items-center">
                                         <div class="d-flex column-gap-1 align-items-center">
@@ -131,7 +136,7 @@ if (isset($_SESSION['user_id'])) {
                                                 <ul class="dropdown-menu p-2">
                                                     <li>
                                                         <a
-                                                            href="/Cakwe/process/post/controllers/bookmark-post.php?post_id=<?= $post['post_id'] ?>">
+                                                            href="/Cakwe/process/post/controllers/bookmark-post.php?post_id=<?= $post['post_id'] ?>&author_id=<?= $post['user_id'] ?>">
                                                             <div
                                                                 class="d-flex align-items-center dropdown-item p-2 column-gap-2">
                                                                 <?php if (isBookmarked($post['post_id'], $user_id)): ?>
@@ -144,18 +149,21 @@ if (isset($_SESSION['user_id'])) {
                                                             </div>
                                                         </a>
                                                     </li>
-                                                            <li>
+                                                    <?php if (checkOwnership($post['post_id'], $user_id)): ?>
+                                                        <li>
                                                             <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                                                                onclick="setDeleteUrl('/Cakwe/process/delete-post/controllers.php?post_id=<?= $post['post_id'] ?>')">
-                                                                <div class="d-flex align-items-center dropdown-item p-2 column-gap-2">
+                                                                onclick="setDeleteUrl('/Cakwe/process/post/controllers/delete-post.php?post_id=<?= $post['post_id'] ?>')">
+                                                                <div
+                                                                    class="d-flex align-items-center dropdown-item p-2 column-gap-2">
                                                                     <img src="./asset/icons/trash.svg" alt="delete">
-                                                                    <p>Delete post</p>
+                                                                    <p class="l-regular-md">Delete post</p>
                                                                 </div>
                                                             </a>
                                                         </li>
+                                                    <?php endif; ?>
                                                 </ul>
                                             </div>
-                                        <?php endif; ?> 
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -168,40 +176,16 @@ if (isset($_SESSION['user_id'])) {
             </div>
         </div>
 
-        <!-- Modal Delete Post -->
-        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Are you sure you want to delete this post?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <a href="#" id="confirmDeleteButton" class="btn btn-danger p-2">Delete</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
         <!-- Sidebar Kanan -->
-        <div class="l-sidebar-right py-2 px-3">
-            <?php include 'views/components/recent-post_component.php' ?>
+        <div class="l-sidebar-right">
+            <div class="d-flex flex-column py-3">
+                <?php include 'views/components/recent-post_component.php' ?>
+            </div>
         </div>
     </div>
 
 
-    <!-- Script Delete Post -->
-    <script>
-        function setDeleteUrl(url) {
-            const deleteButton = document.getElementById('confirmDeleteButton');
-            deleteButton.href = url;
-        }
-    </script>
+    <?php include 'views/components/delete-confirm-modal_component.php' ?>
 
     <!-- BOOTSTRAP -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
