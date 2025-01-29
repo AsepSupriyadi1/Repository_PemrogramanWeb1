@@ -61,7 +61,7 @@ if (isset($_SESSION['user_id'])) {
         <?php include 'views/components/sidebar_component.php' ?>
 
         <!-- Container Content Tengah (Scroll) -->
-        <div class="l-content">
+        <div class="l-content-profile">
 
             <div class="p-4">
 

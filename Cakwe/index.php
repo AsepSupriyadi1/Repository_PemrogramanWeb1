@@ -59,7 +59,7 @@ if (isset($_SESSION['user_id'])) {
         <?php include 'views/components/sidebar_component.php' ?>
 
         <!-- Container Content Tengah (Scroll) -->
-        <div class="l-content">
+        <div class="l-content-home">
             <!-- CONTAINER POST ITEM -->
             <div class="d-flex flex-column row-gap-3 l-post-content lg-w-full">
                 <!-- POST ITEM -->

@@ -118,16 +118,16 @@
             <!-- <div class="l-regular-sm">Trending</div> -->
         </a>
         <a href="#" class="text-center">
-            <img class="menu-icon mb-1" src="./asset/icons/most_votes.svg" alt="most_votes">
-            <!-- <div class="l-regular-sm">Votes</div> -->
-        </a>
-        <a href="#" class="text-center">
-            <img class="menu-icon mb-1" src="./asset/icons/legend.svg" alt="legend">
-            <!-- <div class="l-regular-sm">Legend</div> -->
-        </a>
-        <a href="#" class="text-center">
             <img class="menu-icon mb-1" src="./asset/icons/connections.svg" alt="connections">
             <!-- <div class="l-regular-sm">Friends</div> -->
+        </a>
+        <a href="/Cakwe/content-policy" class="text-center">
+            <img class="menu-icon me-2" src="./asset/icons/policy_document.svg" alt="home">
+            <!-- <span class="l-regular-lg">Content Policy</span> -->
+        </a>
+        <a href="/Cakwe/privacy-policy" class="text-center">
+            <img class="menu-icon me-2" src="./asset/icons/privacy_policy.svg" alt="trending">
+            <!-- <span class="l-regular-lg">Privacy Policy</span> -->
         </a>
     </div>
 </div>
